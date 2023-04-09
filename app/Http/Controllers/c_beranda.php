@@ -46,7 +46,6 @@ class c_beranda extends Controller
             'email.required'=>'email wajib diisi'
         ]);
 
-        $userFree = 11;
         $data = [
             'username' => $request->username,
             'password' => $request->password,

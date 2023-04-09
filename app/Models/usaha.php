@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class usaha extends Model
 {
     use HasFactory;
-    protected $fillable = ['username', 'password', 'nama_usaha', 'alamat', 'nomor_handphone', 'email', 'status'];
+    
     protected $table = 'usaha';
+    
+    protected $fillable = ['username', 'password', 'nama_usaha', 'alamat', 'nomor_handphone', 'email', 'status', 'kecamatan_id'];
+    
     public $timestamps = false;
 }

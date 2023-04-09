@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class kecamatan extends Model
 {
     use HasFactory;
+    
+    protected $table = 'kecamatan';
+
+    protected $fillable = ['kecamatan_id', 'kabupaten_id', 'nama'];
+
+    public $timestamps = false;
 }

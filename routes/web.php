@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\c_beranda;
+use App\Http\Controllers\c_dashboard;
 use App\Http\Controllers\c_login;
 use App\Http\Controllers\c_produk;
 use App\Http\Controllers\c_register;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +23,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', function (){
-    return view('layouts.dashboard');
-})->name('dashboard');
+Route::controller(c_dashboard::class)->prefix('dashboard')->group(function () {
+    Route::get('', 'index')->name('dashboard');
+});
+
 
 Route::controller(c_produk::class)->prefix('produk')->group(function () {
     Route::get('', 'index')->name('produk'); //view data dengan manggil fungsi index pada controller
@@ -34,11 +37,18 @@ Route::controller(c_produk::class)->prefix('produk')->group(function () {
     Route::get('hapus/{produk_id}', 'hapus')->name('produk.hapus'); // menghapus data produk
 }); // prefix untuk penamaan url
 
+
 Route::controller(c_register::class)->prefix('register')->group(function () {
     Route::get('', 'index')->name('register');
-    Route::get('/register/kabupaten/{provinsi_id}', [c_register::class, 'getKabupaten']);
+    Route::post('', 'simpan')->name('register.simpan');
 });
 
 
-Route::resource('beranda', c_beranda::class);
-Route::resource('login', c_login::class);
+Route::controller(c_login::class)->prefix('login')->group(function () {
+    Route::get('', 'index')->name('login');
+    Route::get('akses', 'akses')->name('login.akses');
+});
+
+
+// Route::resource('beranda', c_beranda::class);
+// Route::resource('login', c_login::class);

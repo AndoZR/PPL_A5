@@ -18,8 +18,8 @@ return new class extends Migration
             $table->char('alamat');
             $table->char('nomor_handphone',13);
             $table->char('email');
-            $table->char('status',7);;
-            // $table->integer('kecamatan_id');
+            $table->char('status',7);
+            $table->char('kecamatan_id',7);
             // $table->foreign('kecamatan_id')->references('kecamatan_id')->on('kecamatan');
             // $table->integer('kabupaten_id');
             // $table->foreign('kabupaten_id')->references('kabupaten_id')->on('kabupaten');
