@@ -12,7 +12,7 @@ class c_beranda extends Controller
      */
     public function index()
     {
-        return view('Beranda.beranda');
+        return view('beranda.beranda');
     }
 
     /**
@@ -28,35 +28,7 @@ class c_beranda extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|numeric|unique:usaha,username', 
-            'password' => 'required', 
-            'nama_usaha' => 'required', 
-            'alamat' => 'required', 
-            'nomor_handphone' => 'required', 
-            'email' => 'required', 
-        ],[
-            'username.required'=>'username wajib diisi',
-            'username.numeric'=>'username wajib dalam angka',
-            'username.unique'=>'username telah ada di database',
-            'password.required'=>'password wajib diisi',
-            'nama_usaha.required'=>'nama usaha wajib diisi',
-            'alamat.required'=>'alamat wajib diisi',
-            'nomor_handphone.required'=>'nomor hp wajib diisi',
-            'email.required'=>'email wajib diisi'
-        ]);
-
-        $data = [
-            'username' => $request->username,
-            'password' => $request->password,
-            'nama_usaha' => $request->nama_usaha,
-            'alamat' => $request->alamat,
-            'nomor_handphone' => $request->nomor_handphone,
-            'email' => $request->email,
-            'status' => 'free',
-        ];
-        usaha::create($data);
-        return view('Beranda.beranda');
+        // 
     }
 
     /**

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->integer('stok');
             $table->integer('harga');
             $table->date('tgl_exp');
-            $table->longText('deskripsi');
+            $table->longText('deskripsi')->nullable();
+            $table->timestamp('updated_at');
             // $table->string('usaha_username',10);
             // $table->foreign('usaha_username')->references('username')->on('usaha');
         });

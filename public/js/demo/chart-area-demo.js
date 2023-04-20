@@ -28,14 +28,15 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Area Chart Example
+
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: chartDataProduk.label.concat(chartDataProdukBaru.label),
     datasets: [{
       label: "Earnings",
-      lineTension: 0.3,
+      lineTension: 0, // mengatur kelengkungan garis
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
       pointRadius: 3,
@@ -46,7 +47,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: chartDataProduk.data.concat(chartDataProdukBaru.data),
     }],
   },
   options: {
@@ -69,7 +70,8 @@ var myLineChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 7,
+          autoSkip: false
         }
       }],
       yAxes: [{
@@ -110,9 +112,50 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + ' stok';
         }
       }
     }
   }
 });
+
+
+//-------------------------------------//
+// Mengambil data dari beberapa label
+var labels = myLineChart.data.labels;
+
+// Membuat variabel untuk menampung elemen HTML
+var labelList = "";
+
+// Menambahkan elemen HTML ke dalam variabel labelList menggunakan forEach()
+labels.forEach(function(label) {
+  labelList += "<li>" + label + "</li>";
+});
+
+// Menambahkan labelList ke dalam elemen HTML dengan id "label-list"
+document.getElementById("label-list").innerHTML = labelList;
+
+// Ambil elemen HTML dengan id "data-chart"
+const dataChart = document.getElementById("data-chart");
+
+// Ambil nilai data dari chart
+const chartData = myLineChart.data.datasets[0].data;
+
+// Tambahkan nilai data ke dalam elemen HTML
+dataChart.innerHTML = chartData.join(", ");
+
+
+
+//-----------------------------------------//
+// get the current date
+var currentDate = new Date();
+
+// get the date, month, and year from the current date
+var date = currentDate.getDate();
+var month = currentDate.getMonth() + 1;
+var year = currentDate.getFullYear();
+
+// display the date, month, and year in the input fields
+document.getElementById("date").value = date;
+document.getElementById("month").value = month;
+document.getElementById("year").value = year;

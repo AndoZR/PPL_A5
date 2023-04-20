@@ -3,9 +3,9 @@
 @section('title', 'Produk')
 
 @section('content')
-<form action="{{ isset($produk) ? route('produk.tambah.update', $produk->produk_id) : route('produk.tambah.simpan') }}" method="post">
+<form action="{{ isset($produk) ? route('produk.edit.update', $produk->produk_id) : route('produk.tambah.simpan') }}" method="post">
     @csrf
-        @if ($errors->any())
+        {{-- @if ($errors->any())
         <div class="pt-1">
             <div class="alert alert-danger alert-dismissible fade show d-flex">
                 <button type="button" class="close" data-dismiss='alert' aria-label="close">
@@ -19,7 +19,7 @@
 
             </div>
         </div>
-    @endif
+         @endif --}}
     <div class="row">
         <div class="col-12">
             <div class="card shadow mb-4">
@@ -51,5 +51,19 @@
             </div>
         </div>
     </div>
-</form>    
+</form>
+
+{{-- define errors produk --}}
+@if ($errors->all())
+    <script>
+        Swal.fire(
+        'Whoops',
+           `@foreach ($errors->all() as $items)
+            <li>{{ $items }}</li>
+            @endforeach`,
+        'error'
+    )
+    </script>    
+@endif
+
 @endsection

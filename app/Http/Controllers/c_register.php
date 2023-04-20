@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\usaha;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,7 +37,7 @@ class c_register extends Controller
         while ($i >= 0) {
             $username = $front_username . $i;
 
-            $cek = usaha::where('username', $username)->first();
+            $cek = User::where('username', $username)->first();
             if (!$cek) {
                 break;
             }
@@ -43,7 +45,7 @@ class c_register extends Controller
             $i++;
         }            
 
-        $user = [
+        $user = User::create([
             'username' => $username,
             'password' => Hash::make($request->password),
             'nama_usaha' => $request->nama_usaha,
@@ -51,11 +53,14 @@ class c_register extends Controller
             'nomor_handphone' => $request->nomor_handphone,
             'email' => $request->email,
             'status' => 'free',
-            'kecamatan_id' => $request->kecamatan,
-        ];
+            'kecamatan_id' => $request->kecamatan
+        ]);
 
-        usaha::create($user);
-        return redirect()->route('dashboard');
+        event(new Registered($user));
+        
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
     }
 
     /**

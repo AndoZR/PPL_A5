@@ -14,13 +14,13 @@
                 <thead>
                     <tr>
                         <th>no</th>
-                        <th>Produk ID</th>
+                        {{-- <th>Produk ID</th> --}}
                         <th>Nama</th>
                         <th>Stok</th>
                         <th>Harga</th>
                         <th>Expired</th>
                         <th>Deskripsi</th>
-                        <th>Aksi</th>
+                        <th >Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +28,7 @@
                     @foreach ($produk as $row)
                     <tr>
                         <th>{{ $no++ }}</th>
-                        <td>{{ $row->produk_id }}</td>
+                        {{-- <td>{{ $row->produk_id }}</td> --}}
                         <td>{{ $row->nama }}</td>
                         <td>{{ $row->stok }}</td>
                         <td>{{ $row->harga }}</td>
@@ -38,16 +38,16 @@
                                 {{ $row->deskripsi }}
                             </div>
                         </td>
-                        <td>
+                        <td style="max-width:95px">
                             <a href="{{ route('produk.edit', $row->produk_id) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ route('produk.hapus', $row->produk_id) }}" class="btn btn-danger">Hapus</a>
+                            <a href="{{ route('produk.hapus', $row->produk_id) }}" class="btn btn-danger" id="sweetDelete">Hapus</a>
                         </td>
                     </tr>
-                        
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 @endsection

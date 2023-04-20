@@ -13,7 +13,7 @@ class c_produk extends Controller
     public function index()
     {
         $produk = produk::get();
-        return view('produk.produk', ['produk'=>$produk]);
+        return view('produk.produk', ['produk' => $produk]);
     }
 
     public function tambah()
@@ -29,7 +29,6 @@ class c_produk extends Controller
             'stok' => 'required|integer', 
             'harga' => 'required|integer', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
-            'deskripsi' => 'required', 
         ],[
             'nama.required'=>'nama wajib diisi',
             'stok.required'=>'stok wajib diisi',
@@ -38,7 +37,6 @@ class c_produk extends Controller
             'harga.integer'=>'harga hanya berisikan angka',
             'tgl_exp.required'=>'expired wajib diisi',
             'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
-            'deskripsi.required'=>'deskripsi wajib diisi',
         ]);
 
         // give id prd
@@ -66,13 +64,13 @@ class c_produk extends Controller
         ];
 
         produk::create($data);
-        return redirect()->route('produk'); // setelah menyimpan produk maka ototmatis diarahkan ke route produk
+        return redirect()->route('produk')->with('message', 'Data berhasil disimpan!');
     }
 
     public function edit($produk_id)
     {
-        $produk_id = produk::where('produk_id', $produk_id)->firstOrFail();
-        return view('produk.tambahProduk', ['produk'=>$produk_id]);
+        $dataProduk = produk::where('produk_id', $produk_id)->firstOrFail();
+        return view('produk.tambahProduk', ['produk'=>$dataProduk]);
     }
     
     public function update($produk_id, Request $request)
@@ -83,7 +81,6 @@ class c_produk extends Controller
             'stok' => 'required|integer', 
             'harga' => 'required|integer', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
-            'deskripsi' => 'required', 
         ],[
             'nama.required'=>'nama wajib diisi',
             'stok.required'=>'stok wajib diisi',
@@ -92,7 +89,6 @@ class c_produk extends Controller
             'harga.integer'=>'harga hanya berisikan angka',
             'tgl_exp.required'=>'expired wajib diisi',
             'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
-            'deskripsi.required'=>'deskripsi wajib diisi',
         ]);
 
         $data = [
@@ -109,6 +105,7 @@ class c_produk extends Controller
 
     public function hapus($produk_id)
     {
+        
         produk::where('produk_id', $produk_id)->delete();
         return redirect()->route('produk');
     }

@@ -7,17 +7,9 @@
     {{-- <meta http-equiv="refresh" content="1"> --}}
     <title>Login | Agroperate</title>
     <link rel="stylesheet" href="{{ url('assets/cssBootstrap/bootstrap.min.css') }}">
+    <script src="{{ asset("assets/sweetalert2/dist/sweetalert2.all.min.js") }}"></script>
 </head>
 <body class="bg-primary bg-opacity-25">
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
     <section class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
         <div class="container">
             <div class="row">
@@ -30,7 +22,7 @@
                             <div class="m-5 text-center">
                                 <h2>Selamat Datang</h2>
                             </div>
-                            <form action="{{ route('login.akses') }}" class="m-5" method="get">
+                            <form action="{{ route('login.akses') }}" class="m-5 user" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12 mb-3">
@@ -40,6 +32,9 @@
                                     <div class="col-12 mb-3">
                                         <label class="form-label" for="password">Password</label>
                                         <input class="form-control" type="password" id="password" placeholder="Masukkan password anda" name="password">
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        <a href="{{ route('password.request') }}">Forgot Password</a>
                                     </div>
                                     <div class="text-center">
                                         <button class="btn btn-primary form-control mt-3 w-50" type="submit">Login</button>
@@ -55,5 +50,17 @@
             </div>
         </div>
     </section>
+@if ($errors->all())
+    <script>
+        Swal.fire(
+        'Whoops',
+           `@foreach ($errors->all() as $items)
+            {{ $items }}
+            <?php break ?>
+            @endforeach`,
+        'error'
+    )
+    </script>    
+@endif
 </body>
 </html>
