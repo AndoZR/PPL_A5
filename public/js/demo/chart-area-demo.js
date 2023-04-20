@@ -33,7 +33,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: chartDataProduk.label.concat(chartDataProdukBaru.label),
+    labels: chartDataProduk.label, //.concat(chartDataProdukBaru.label),
     datasets: [{
       label: "Earnings",
       lineTension: 0, // mengatur kelengkungan garis
@@ -47,7 +47,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: chartDataProduk.data.concat(chartDataProdukBaru.data),
+      data: chartDataProduk.data, //.concat(chartDataProdukBaru.data),
     }],
   },
   options: {

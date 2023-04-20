@@ -102,7 +102,7 @@ Route::middleware(['auth', 'verified', 'checkStatus:free,premium'])->group(funct
 Route::middleware(['auth', 'verified', 'checkStatus:premium'])->group(function (){
     Route::controller(c_ramalan::class)->prefix('ramalan')->group(function () {
         Route::get('', 'getProduk')->name('ramalan');
-        Route::get('predik', 'Predict')->name('ramalan.predict');
+        Route::post('', 'Predict')->name('ramalan.predict');
     });
 
     
