@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\produk;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class c_produk extends Controller
 {
@@ -12,8 +14,15 @@ class c_produk extends Controller
      */
     public function index()
     {
-        $produk = produk::get();
-        return view('produk.produk', ['produk' => $produk]);
+        if (Auth::guard('web')->check()){
+            $produk = produk::where('akun_usaha_username', Auth::guard('web')->user()->username)->get();
+            return view('produk.produk', ['produk' => $produk]);
+        }
+        elseif (Auth::guard('karyawan')->check()){
+            $username_usaha = Auth::guard('karyawan')->user()->akun_usaha_username;
+            $produk = produk::where('akun_usaha_username', $username_usaha)->get();
+            return view('produk.produk', ['produk' => $produk]);
+        }
     }
 
     public function tambah()
@@ -52,16 +61,34 @@ class c_produk extends Controller
     
             $i++;
         }
-
-        // set var
-        $data = [
-            'produk_id' => $produk_id,
-            'nama'=>$request->nama,
-            'stok'=>$request->stok,
-            'harga'=>$request->harga,
-            'tgl_exp'=>$request->tgl_exp,
-            'deskripsi'=>$request->deskripsi
-        ];
+        
+        // get username of akun usaha
+        if (Auth::guard('web')->check()){
+            // set var
+            $data = [
+                'produk_id' => $produk_id,
+                'nama'=>$request->nama,
+                'stok'=>$request->stok,
+                'harga'=>$request->harga,
+                'tgl_exp'=>$request->tgl_exp,
+                'deskripsi'=>$request->deskripsi,
+                'akun_usaha_username'=>Auth::guard('web')->user()->username,
+            ];
+        }
+        elseif (Auth::guard('karyawan')->check()){
+            $username_usaha = Auth::guard('karyawan')->user()->akun_usaha_username;
+            // set var
+            $data = [
+                'produk_id' => $produk_id,
+                'nama'=>$request->nama,
+                'stok'=>$request->stok,
+                'harga'=>$request->harga,
+                'tgl_exp'=>$request->tgl_exp,
+                'deskripsi'=>$request->deskripsi,
+                'akun_usaha_username'=>$username_usaha,
+                'akun_karyawan_username'=>Auth::guard('karyawan')->user()->username
+            ];
+        }
 
         produk::create($data);
         return redirect()->route('produk')->with('message', 'Data berhasil disimpan!');
@@ -91,21 +118,40 @@ class c_produk extends Controller
             'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
         ]);
 
-        $data = [
-            'produk_id' => $produk_id,
-            'nama'=>$request->nama,
-            'stok'=>$request->stok,
-            'harga'=>$request->harga,
-            'tgl_exp'=>$request->tgl_exp,
-            'deskripsi'=>$request->deskripsi
-        ];
+        // get username of akun usaha
+        if (Auth::guard('web')->check()){
+            // set var
+            $data = [
+                'produk_id' => $produk_id,
+                'nama'=>$request->nama,
+                'stok'=>$request->stok,
+                'harga'=>$request->harga,
+                'tgl_exp'=>$request->tgl_exp,
+                'deskripsi'=>$request->deskripsi,
+                'akun_usaha_username'=>Auth::guard('web')->user()->username,
+            ];
+        }
+        elseif (Auth::guard('karyawan')->check()){
+            $username_usaha = Auth::guard('karyawan')->user()->akun_usaha_username;
+            // set var
+            $data = [
+                'produk_id' => $produk_id,
+                'nama'=>$request->nama,
+                'stok'=>$request->stok,
+                'harga'=>$request->harga,
+                'tgl_exp'=>$request->tgl_exp,
+                'deskripsi'=>$request->deskripsi,
+                'akun_usaha_username'=>$username_usaha,
+                'akun_karyawan_username'=>Auth::guard('karyawan')->user()->username
+            ];
+        }
+
         produk::where('produk_id', $produk_id)->update($data);
         return redirect()->route('produk');
     }
 
     public function hapus($produk_id)
     {
-        
         produk::where('produk_id', $produk_id)->delete();
         return redirect()->route('produk');
     }

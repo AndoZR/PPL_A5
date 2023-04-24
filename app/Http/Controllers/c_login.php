@@ -32,29 +32,32 @@ class c_login extends Controller
             'password.required'=>'Mohon mengisi form yang kosong!'
         ])->validate();        
 
-        if (!Auth::attempt($request->only(['username', 'password']))) {
+        if (strpos($request->username, 'USR') !== false){
+            if (!Auth::guard('web')->attempt($request->only(['username', 'password']))) {
+                throw ValidationException::withMessages([
+                    // 'username'=>trans('auth.failed')
+                    'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
+                ]);
+            }
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+        elseif (strpos($request->username, 'KRYWN') !== false) {
+            if (!Auth::guard('karyawan')->attempt($request->only(['username', 'password']))){
+                throw ValidationException::withMessages([
+                    'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
+                ]);
+            }
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+        else{
             throw ValidationException::withMessages([
                 // 'username'=>trans('auth.failed')
                 'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
             ]);
         }
 
-        $request->session()->regenerate();
-        return redirect()->route('dashboard');
-
-        // try {
-            // if (!Auth::attempt($request->only(['username', 'password']))) {
-            //     throw ValidationException::withMessages([
-            //         // 'username'=>trans('auth.failed')
-            //         'username'=>'username dan password tidak sesuai! Silahkan cek kembali!',
-            //     ]);
-            // }
-            // $request->session()->regenerate();
-            // return redirect()->route('dashboard');
-        // }catch(Exception $e)
-        // {
-        //     return $e->getMessage();
-        // }
     }
 
     public function logout(Request $request)

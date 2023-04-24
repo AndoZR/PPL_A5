@@ -11,7 +11,7 @@ class pendapatan extends Model
 
     protected $table = 'pendapatan';
 
-    protected $fillable = ['pendapatan_id', 'timestamp', 'nominal', 'keterangan', 'usaha_username'];
+    protected $fillable = ['pendapatan_id', 'tanggal', 'keterangan', 'jenis_produk', 'jumlah_produk', 'akun_usaha_username', 'akun_karyawan_username'];
 
     public $timestamps = false;
 }

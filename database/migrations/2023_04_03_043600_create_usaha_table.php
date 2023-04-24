@@ -12,19 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usaha', function (Blueprint $table) {
-            $table->string('username',10)->unique();
-            $table->char('password');
+            $table->string('username',10)->primary();
+            $table->string('password');
             $table->char('nama_usaha');
             $table->char('alamat');
             $table->char('nomor_handphone',13);
             $table->char('email');
             $table->char('status',7);
             $table->char('kecamatan_id',7);
-            // $table->foreign('kecamatan_id')->references('kecamatan_id')->on('kecamatan');
-            // $table->integer('kabupaten_id');
-            // $table->foreign('kabupaten_id')->references('kabupaten_id')->on('kabupaten');
-            // $table->integer('provinsi_id');
-            // $table->foreign('provinsi_id')->references('provinsi_id')->on('provinsi');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

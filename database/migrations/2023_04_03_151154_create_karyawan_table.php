@@ -12,21 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->string('username',10)->unique();
+            $table->string('username')->unique();
             $table->char('password');
-            $table->char('nama');
-            $table->char('alamat');
-            $table->char('nomor_handphone');
-            $table->char('email');
-            $table->char('jabatan');
-            $table->string('usaha_username',10);
-            $table->foreign('usaha_username')->references('username')->on('usaha');
-            // $table->integer('kecamatan_id');
+            $table->string('nama',50);
+            $table->string('alamat',50);
+            $table->char('nomor_handphone',13);
+            $table->string('email',50);
+            $table->string('jabatan',50);
+            $table->string('akun_usaha_username',10);
+            $table->foreign('akun_usaha_username')->references('username')->on('users');
+            $table->integer('kecamatan_id');
             // $table->foreign('kecamatan_id')->references('kecamatan_id')->on('kecamatan');
-            // $table->integer('kabupaten_id');
-            // $table->foreign('kabupaten_id')->references('kabupaten_id')->on('kabupaten');
-            // $table->integer('provinsi_id');
-            // $table->foreign('provinsi_id')->references('provinsi_id')->on('provinsi');
         });
     }
 

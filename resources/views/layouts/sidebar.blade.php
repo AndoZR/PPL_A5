@@ -44,7 +44,7 @@
         Premium
     </div>
 
-    @if (auth()->user()->status == 'premium')
+    @if (isset(auth()->user()->status) && auth()->user()->status == 'premium')
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ramalan') }}">

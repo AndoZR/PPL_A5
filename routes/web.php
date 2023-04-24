@@ -49,30 +49,36 @@ Route::controller(c_login::class)->prefix('login')->group(function () {
     })->name('password.reset');
     Route::post('/reset-password','updatePassword')->name('password.update');
 
-})->middleware('guest');
+});
 
 Route::controller(c_register::class)->prefix('register')->group(function () {
     Route::get('', 'index')->name('register');
     Route::post('', 'simpan')->name('register.simpan');
-})->middleware('guest');
+});
 
 
-
-// ------------------------ USER FREE AND PREMIUM ONLY -----------------
-Route::middleware(['auth', 'verified', 'checkStatus:free,premium'])->group(function (){
+// ['auth:web', 'verified', 'checkStatus:premium,free']
+// ------------------------ USER PEMILIK USAHA DAN KARYAWAN FREE AND PREMIUM ONLY -----------------
+Route::middleware(['multiAuth'])->group(function (){
     Route::get('dashboard', [c_dashboard::class, 'index'])->name('dashboard');
     Route::get('logout', [c_login::class, 'logout'])->name('logout');
 
-    // Akun Usaha
+    // Akun Usaha ZONE dengan user usaha
     Route::controller(c_akun::class)->prefix('akun-usaha')->group(function () {
         Route::get('', 'akunUsaha')->name('akunUsaha');
         Route::get('edit', 'editAkunUsaha')->name('akunUsaha.edit');
         Route::post('edit', 'editAkunUsahaProcess')->name('akunUsaha.edit.process');
     });
     
-    // Akun Karyawan 
+    // Akun Karyawan ZONE dengan user usaha
     Route::controller(c_akun::class)->prefix('akun-karyawan')->group(function () {
-        Route::get('akun-karyawan', 'akunKaryawan')->name('akunKaryawan');
+        Route::get('', 'akunKaryawan')->name('akunKaryawan');
+        Route::get('tambah', 'akunKaryawanAdd')->name('akunKaryawan.tambah');
+        Route::post('tambah', 'akunKaryawanAddSave')->name('akunKaryawan.tambah.save');
+        Route::get('detail/{username}', 'detailKaryawan')->name('akunKaryawan.detail');
+        Route::get('hapus/{username}', 'hapusKaryawan')->name('akunKaryawan.hapus');
+        Route::get('edit/{username}', 'editKaryawan')->name('akunKaryawan.edit');
+        Route::post('edit/{username}', 'editSimpanKaryawan')->name('akunKaryawan.edit.simpan');
     });
     
     // fitur Produk
@@ -85,6 +91,7 @@ Route::middleware(['auth', 'verified', 'checkStatus:free,premium'])->group(funct
         Route::get('hapus/{produk_id}', 'hapus')->name('produk.hapus'); // menghapus data produk
     });
     
+    // fitur pendapatan
     Route::controller(c_pendapatan::class)->prefix('pendapatan')->group(function () {
         Route::get('','index')->name('pendapatan');
         Route::get('tambah','tambah')->name('pendapatan.tambah');
@@ -97,16 +104,15 @@ Route::middleware(['auth', 'verified', 'checkStatus:free,premium'])->group(funct
 });
 
 
-
 // --------------------- USER PREMIUM ONLY ------------------------
-Route::middleware(['auth', 'verified', 'checkStatus:premium'])->group(function (){
+Route::middleware(['auth:web', 'verified', 'checkStatus:premium'])->group(function (){
     Route::controller(c_ramalan::class)->prefix('ramalan')->group(function () {
         Route::get('', 'getProduk')->name('ramalan');
         Route::post('', 'Predict')->name('ramalan.predict');
     });
-
     
 });
+
 
 
 // --------------------- The Email Verification Notice -----------------

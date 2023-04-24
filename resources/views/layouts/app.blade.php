@@ -124,7 +124,7 @@
             e.preventDefault();
             var link = $(this).attr("href");
             Swal.fire({
-                title: 'Apakah data produk ini akan dihapus?',
+                title: 'Apakah data ini akan dihapus?',
                 text: "Data tidak akan dapat dikembalikan!",
                 icon: 'warning',
                 showCancelButton: true,

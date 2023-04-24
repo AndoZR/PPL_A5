@@ -26,9 +26,9 @@ class c_ramalan extends Controller
         // // dd($this->produk);
         // return view('ramalan.ramalan', ['produk' => $this->produk]);
 
-        $produk = produk::orderByRaw('MONTH(created_at) ASC')->get();
+        $produk = produk::orderByRaw('MONTH(updated_at) ASC')->get();
         $grouped = $produk->groupBy(function ($item) {
-            return date('M', strtotime($item->created_at));
+            return date('M', strtotime($item->updated_at));
         });
     
         $data = [

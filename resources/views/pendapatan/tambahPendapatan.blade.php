@@ -13,14 +13,22 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="timestamp">Waktu</label>
-                        <input type="date" class="form-control" id="timestamp" name="timestamp" value="{{ isset($pendapatan) ? $pendapatan->timestamp : '' }}">
-
-                        <label for="nominal">Nominal</label>
-                        <input type="text" class="form-control" id="nominal" name="nominal" value="{{ isset($pendapatan) ? $pendapatan->nominal : '' }}">
-
+                        <label for="timestamp">tanggal</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ isset($pendapatan) ? $pendapatan->tanggal : '' }}">
+                        
                         <label for="keterangan">Keterangan</label>
                         <input type="text" class="form-control" id="keterangan" name="keterangan" value="{{ isset($pendapatan) ? $pendapatan->keterangan : '' }}">
+
+                        <label class="form-label" for="jenis_produk">Jenis Produk</label>
+                        <select class="form-control form-select" name="jenis_produk">
+                            <option value="">Pilih Produk</option>
+                            @foreach ($jenis_produk as $item)
+                            <option value="{{ $item->produk_id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+
+                        <label for="jumlah_produk">Jumlah Produk</label>
+                        <input type="text" class="form-control" id="jumlah_produk" name="jumlah_produk" value="{{ isset($pendapatan) ? $pendapatan->jumlah_produk : '' }}">
                     </div>
                 </div>
                 <div class="card-footer">

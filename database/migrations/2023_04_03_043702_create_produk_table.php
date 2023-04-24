@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('produk', function (Blueprint $table) {
             $table->char('produk_id')->primary();
-            $table->char('nama');
+            $table->string('nama',50);
             $table->integer('stok');
             $table->integer('harga');
             $table->date('tgl_exp');
-            $table->longText('deskripsi')->nullable();
+            $table->string('deskripsi',100)->nullable();
             $table->timestamp('updated_at');
-            // $table->string('usaha_username',10);
-            // $table->foreign('usaha_username')->references('username')->on('usaha');
+            $table->char('akun_usaha_username');
+            $table->foreign('akun_usaha_username')->references('username')->on('users');
+            $table->char('akun_karyawan_username')->nullable();
+            $table->foreign('akun_karyawan_username')->references('username')->on('karyawan');
         });
     }
 

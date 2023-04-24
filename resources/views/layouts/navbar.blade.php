@@ -162,13 +162,17 @@
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
             </div>
         </li>
-
         <div class="topbar-divider d-none d-sm-block"></div>
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
+                @if (Auth::guard('web')->check())
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('web')->user()->username }}</span>
+                @elseif (Auth::guard('karyawan')->check())
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('karyawan')->user()->username }}</span>
+                @endif
+
                 <img class="img-profile rounded-circle"
                     src="{{ asset('img/undraw_profile.svg') }}">
             </a>

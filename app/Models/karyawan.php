@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Model;
 
-class karyawan extends Model
+class Karyawan extends Model
 {
     use HasFactory;
 
@@ -14,51 +17,23 @@ class karyawan extends Model
      *
      * @var array<int, string>
      */
+
+    protected $table = 'karyawan';
+
     protected $primaryKey = 'username';
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
     'username', 
     'password', 
-    'nama_usaha', 
+    'nama', 
     'alamat', 
     'nomor_handphone', 
     'email', 
-    'status', 
+    'jabatan', 
+    'akun_usaha_username',
     'kecamatan_id'];
 
-    public function getEmailForVerification()
-    {
-        return $this->email;
-    }
-
-    public function getAuthIdentifierName()
-    {
-        return 'username';
-    }
-
-    public function getAuthIdentifier()
-    {
-        return $this->username;
-    }    
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }

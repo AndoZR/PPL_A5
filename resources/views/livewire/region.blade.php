@@ -7,12 +7,11 @@
             <option value="{{ $item->provinsi_id }}">{{ $item->nama }}</option>
             @endforeach
         </select>
-        {{-- {{ dd($dataKabupatens) }} --}}
     </div>
     <div class="col-12 mb-3">
         <label class="form-label" for="kabupaten">Kabupaten</label>
         <select class="form-control form-select" wire:model="selectedKabupaten" name="kabupaten">
-            <option>Pilih Kabupaten</option>
+            <option value="">Pilih Kabupaten</option>
             @if (!is_null($dataKabupatens))
             @foreach ($dataKabupatens as $item)
                 <option value="{{ $item['kabupaten_id'] }}">{{ $item['nama'] }}</option>
@@ -23,7 +22,7 @@
     <div class="col-12 mb-3">
         <label class="form-label" for="kecamatan">Kecamatan</label>
         <select class="form-control form-select" wire:model="selectedKecamatan" name="kecamatan">
-            <option>Pilih Kecamatan</option>
+            <option value="">Pilih Kecamatan</option>
             @if (!is_null($dataKecamatan))
             @foreach ($dataKecamatan as $item)
                 <option option value="{{ $item['kecamatan_id'] }}">{{ $item['nama'] }}</option>

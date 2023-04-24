@@ -59,8 +59,12 @@
             <div class="col-md-6">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Halo {{ auth()->user()->nama_usaha }}</h4>
-                    </div>
+                        @if (Auth::guard('web')->check())
+                            <h4 class="text-right">Halo {{ Auth::guard('web')->user()->nama_usaha }}</h4>
+                        @elseif (Auth::guard('karyawan')->check())
+                            <h4 class="text-right">Halo {{ Auth::guard('karyawan')->user()->nama }}</h4>
+                        @endif
+                        </div>
                     <div class="row mt-3">
                         <div class="col-md-12 mb-2"><label class="labels">Nama Usaha</label><input disabled type="text" class="form-control bg-white" value="{{ $user->nama_usaha }}"></div>
                         <div class="col-md-12 mb-2"><label class="labels">Alamat</label><input disabled type="text" class="form-control bg-white" value="{{ $user->alamat }}"></div>
@@ -81,9 +85,11 @@
 
         </div>
         <div class="row text-center justify-content-end">
+            @if (Auth::guard('web')->check())
             <div class="mb-5 col-auto">
                 <a href="{{ route('akunUsaha.edit') }}" class="btn btn-primary profile-button" type="button">Edit Akun</a>
             </div>
+            @endif
         </div>
     </div>
 @if (session('message')))

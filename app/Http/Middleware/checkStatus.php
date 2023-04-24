@@ -18,6 +18,6 @@ class checkStatus
         if (in_array($request->user()->status, $status)){
             return $next($request);
         }
-        return redirect('/login');
+        return redirect('/beranda');
     }
 }
