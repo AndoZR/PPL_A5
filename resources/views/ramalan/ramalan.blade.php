@@ -24,7 +24,9 @@
                     <canvas id="myAreaChart"></canvas>
                 </div>
                 <hr>
-                Di sini untuk mengidentifikasi error predict
+                @if(isset($mape))
+                MAPE: {{ $mape }}
+                @endif
             </div>
         </div>
     </div>

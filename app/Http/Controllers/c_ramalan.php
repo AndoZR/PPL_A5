@@ -49,6 +49,8 @@ class c_ramalan extends Controller
 
     public function Predict(Request $request)
     {
+        // ------------------- KALKULASI PREDIKSI -----------------
+
         // Data Time Series
         // $data = array(10, 12, 14, 16, 18, 20, 22, 24, 26, 28);
         $this->getProduk();
@@ -78,6 +80,21 @@ class c_ramalan extends Controller
         // echo "Konstanta Alpha: " . $alpha . "\n";
         // echo "Prediksi: " . implode(", ", $prediksi) . "\n";
 
+        // ---------------- KALKULASI ERROR MAPE ---------------
+        function mape($actual, $predicted) {
+            $sum = 0;
+            $n = count($actual);
+            for ($i = 0; $i < $n; $i++) {
+              if ($actual[$i] != 0) {
+                $sum += abs(($actual[$i] - $predicted[$i]) / $actual[$i]);
+              }
+            }
+            $mape = ($sum / $n) * 100;
+            return $mape;
+          }
+        $mape = round(mape($dataAktual, $prediksi)) . '%';
+
+        
         $lastData = array_slice($prediksi, -($permintaanPredik), $permintaanPredik);
         // echo "Hasil Prediksi 2 trakhir: " . implode(", ", $lastData) . "\n";
         $data = [
@@ -91,10 +108,11 @@ class c_ramalan extends Controller
         }
 
         $this->dataPrediksi = json_encode($data);
-        
+
         return view('ramalan.ramalan')->with([
             'produk' => $this->produk,
             'dataPrediksi' => $this->dataPrediksi,
+            'mape' => $mape,
         ]);
     }
 
