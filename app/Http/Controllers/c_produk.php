@@ -147,7 +147,7 @@ class c_produk extends Controller
         }
 
         produk::where('produk_id', $produk_id)->update($data);
-        return redirect()->route('produk');
+        return redirect()->route('produk')->with('message', 'Data berhasil disimpan!');
     }
 
     public function hapus($produk_id)

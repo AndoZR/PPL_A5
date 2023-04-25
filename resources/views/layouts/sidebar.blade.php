@@ -35,6 +35,7 @@
 </div>
     
 
+@if (Auth::guard('web')->check() && Auth::guard('web')->user()->status == 'premium')
 <!-- Fitur Premium -->
 <div>
     <hr class="sidebar-divider">
@@ -44,15 +45,14 @@
         Premium
     </div>
 
-    @if (isset(auth()->user()->status) && auth()->user()->status == 'premium')
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ramalan') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Ramalan</span></a>
     </li>
-    @endif
 </div>
+@endif
     
 {{-- fitur kelompok 3 --}}
 {{-- <div>
@@ -153,11 +153,13 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div> --}}
 
-    <!-- Sidebar Message -->
+@if (Auth::guard('web')->check() && Auth::guard('web')->user()->status == 'free')
+    <!-- Sidebar Message buat ke premium -->
     <div class="sidebar-card d-none d-lg-flex">
         <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
         <p class="text-center mb-2"><strong>Agroperate</strong> memiliki fitur premium, aktifkan sekarang!</p>
-        <a class="btn btn-success btn-sm" href="https://google.com">Get Premium!</a>
+        <a class="btn btn-success btn-sm" href="{{ route('getPremium') }}">Get Premium!</a>
     </div> 
+@endif
 
 </ul>

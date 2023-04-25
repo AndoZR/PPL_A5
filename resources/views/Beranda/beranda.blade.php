@@ -35,7 +35,7 @@
   <header id="header" class="fixed-top shadow-lg">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">AGROPERATE</a></h1>
+      <h1 class="logo me-auto"><a href="">OPERATS</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       {{-- <a href="index.html" class="logo me-auto"><img src="{{ asset('assetsBeranda/img/unej.png') }}" alt="" class="img-fluid"></a> --}}
 
@@ -44,54 +44,41 @@
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           {{-- <li><a class="nav-link scrollto" href="#about">About</a></li> --}}
           {{-- <li><a class="nav-link scrollto" href="#services">Services</a></li> --}}
-          <li><a href="{{ route('produk') }}">Produk</a></li>
+          {{-- <li><a href="{{ route('produk') }}">Produk</a></li> --}}
           {{-- <li><a class="nav-link scrollto" href="#portfolio">Ramalan</a></li> --}}
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <li><a href="{{ route('produk') }}">Produk</a></li>
+              {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
                   <li><a href="#">Deep Drop Down 3</a></li>
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
+                </ul> --}}
               </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
+              @if (Auth::guard('web')->check() && Auth::guard('web')->user()->status === 'premium' )
+              <li><a href="{{ route('ramalan') }}">Ramalan</a></li>
+              @endif
             </ul>
           </li>
-          {{-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> --}}
-          @if (Auth::check() && Auth::user()->email_verified_at != null)
-              <!-- Nav Item - User Information -->
+          <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
+
+          @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
+              <!-- Nav Item - User Information #PERLU DI UPDATE -->
               <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                <a class="nav-link" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                      @if (Auth::guard('web')->check())
+                        {{ Auth::guard('web')->user()->nama_usaha}}
+                      @elseif (Auth::guard('karyawan')->check())
+                        {{ Auth::guard('karyawan')->user()->nama}}
+                      @endif
+                    </span>
                 </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
-                    </a>
-                </div>
             </li>
           @else
             <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
@@ -109,8 +96,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Better Solutions For Your Business</h1>
-          <h2>We are team of talented designers making websites with Bootstrap</h2>
+          <h1>Better Solutions For Your Agro Business</h1>
+          <h2>Operats menyediakan layanan dan fitur penunjang bisnismu</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="{{ route('dashboard') }}" class="btn-get-started scrollto me-3">Mulai Beroperasi</a>
             {{-- <a href="#about" class="btn-get-started scrollto">Mulai Beroperasi</a> --}}
@@ -204,37 +191,37 @@
           <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
             <div class="content">
-              <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
+              <h3>Nikmati Fitur <strong>Free</strong> OPERATS</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                OPERATS menyediakan berbagai fitur yang dirancang khusus untuk membantu bisnis dalam mengoptimalkan kinerja dan pengembangan usahamu, 
               </p>
             </div>
 
             <div class="accordion-list">
               <ul>
                 <li>
-                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Manamejem Produk <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                     <p>
-                      Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                      Fitur ini dapat membantu Anda mengelola produk bisnis Anda dengan melibatkan beberapa atribut seperti tanggal kadaluwarsa, nama produk, harga, dan stok.
                     </p>
                   </div>
                 </li>
 
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Pencatatan Pendapatan <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                      Kelola pendapatan bisnismu dengan perhitungan otomatis.
                     </p>
                   </div>
                 </li>
 
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Pencatatan Pengeluaran <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                      Pantau uang yang keluar dari keuangan bisnismu untuk membantu mengelola keuangan dengan lebih efektif dan efisien.
                     </p>
                   </div>
                 </li>
@@ -248,10 +235,45 @@
         </div>
 
       </div>
+
+      <!-- ======= Premium ======= -->
+      <div class="container-fluid" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-5 align-items-stretch img" style='background-image: url("assetsBeranda/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+            <div class="content">
+              <h3>Nikmati Fitur <strong>Premium</strong> OPERATS</h3>
+              <p>
+                OPERATS menyediakan fitur khusus Anda yang upgrade ke premium yang dirancang untuk membantu bisnis dalam mengoptimalkan kinerja dan pengembangan usahamu, 
+              </p>
+            </div>
+
+            <div class="accordion-list">
+              <ul>
+                <li>
+                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Ramalan Stok <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                    <p>
+                      Fitur ini dapat membantu Anda memprefiksi stok produk bisnis Anda dengan metode Eksponensial Smoothing supaya Anda dapat mengambil keputusan dari hasil prediksi.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
     </section><!-- End Why Us Section -->
 
     <!-- ======= Skills Section ======= -->
-    <section id="skills" class="skills">
+    {{-- <section id="skills" class="skills">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
@@ -301,10 +323,10 @@
         </div>
 
       </div>
-    </section><!-- End Skills Section -->
+    </section><!-- End Skills Section --> --}}
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
+    {{-- <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -348,10 +370,10 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section><!-- End Services Section --> --}}
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
+    {{-- <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
 
         <div class="row">
@@ -365,10 +387,10 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section><!-- End Cta Section --> --}}
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+    {{-- <section id="portfolio" class="portfolio">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -478,10 +500,10 @@
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section><!-- End Portfolio Section --> --}}
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    {{-- <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -562,10 +584,10 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section><!-- End Team Section --> --}}
 
     <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    {{-- <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -623,10 +645,10 @@
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
+    </section><!-- End Pricing Section --> --}}
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
+    {{-- <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -685,10 +707,10 @@
         </div>
 
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section><!-- End Frequently Asked Questions Section --> --}}
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    {{-- <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -755,12 +777,13 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section><!-- End Contact Section --> --}}
 
-  </main><!-- End #main -->
+  </main>
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
+  {{-- <footer id="footer">
 
     <div class="footer-newsletter">
       <div class="container">
@@ -841,7 +864,7 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer><!-- End Footer --> --}}
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

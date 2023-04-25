@@ -40,7 +40,7 @@ class c_login extends Controller
                 ]);
             }
             $request->session()->regenerate();
-            return redirect()->route('beranda');
+            return redirect()->route('beranda.usaha');
         }
         elseif (strpos($request->username, 'KRYWN') !== false) {
             if (!Auth::guard('karyawan')->attempt($request->only(['username', 'password']))){
@@ -57,7 +57,6 @@ class c_login extends Controller
                 'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
             ]);
         }
-
     }
 
     public function logout(Request $request)

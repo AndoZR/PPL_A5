@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Model;
 
-class Karyawan extends Model
+class karyawan extends Model
 {
     use HasFactory;
 

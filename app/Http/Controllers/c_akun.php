@@ -190,4 +190,13 @@ class c_akun extends Controller
         
         return redirect()->route('akunKaryawan.detail', $request->username)->with('message', 'Data berhasil disimpan!');
     }
+
+    // get premium mas broo!!!
+    public function getPremium ()
+    {
+        Auth::guard('web')->user()->update([
+            'status' => 'premium'
+        ]);
+        return redirect()->route('dashboard');
+    }
 }

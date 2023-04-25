@@ -50,4 +50,14 @@
     </div>
 </div>
 
+@if (session('message'))
+    <script>
+        Swal.fire(
+        'Asekkkkk',
+           `{{ session('message') }}`,
+        'success'
+    )
+    </script>    
+@endif 
+
 @endsection

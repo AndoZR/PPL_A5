@@ -66,7 +66,7 @@
                     <div class="col-md-12 mb-2"><label class="labels">No Handphone</label><input type="text" class="form-control bg-white" value="{{ $karyawan->nomor_handphone }}"  name="nomor_handphone"></div>
                     <div class="col-md-12 mb-2"><label class="labels">Email</label><input type="text" class="form-control bg-white" value="{{ $karyawan->email }}"  name="email"></div>
                     <div class="col-md-12 mb-2"><label class="labels">Jabatan</label><input type="text" class="form-control bg-white" value="{{ $karyawan->jabatan }}"  name="jabatan"></div>
-                    <div class="col-md-12 mb-2"><label class="labels">Password</label><input type="text" class="form-control bg-white" value="{{ $karyawan->username }}"  name="username" disabled></div>
+                    <div class="col-md-12 mb-2"><label class="labels">Username</label><input type="text" class="form-control bg-white" value="{{ $karyawan->username }}"  name="username" disabled></div>
                     <div class="col-md-12 mb-2"><label class="labels">Password</label><input type="text" class="form-control bg-white" value="{{ $karyawan->password }}"  name="password"></div>
                 </div>
             </div>

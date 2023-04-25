@@ -44,5 +44,5 @@
                     <span>Akun Karyawan</span></a>
             </li>
             @endif
-
+    <a href="{{ route('dashboard') }}" class="ml-3 mr-3 d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">Kembali ke Dashboard</a>        
 </ul>

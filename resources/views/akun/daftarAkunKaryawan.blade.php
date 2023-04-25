@@ -4,9 +4,8 @@
 
 @section('content')
 <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex align-items-center">
+    <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Data Karyawan</h6>
-        <a href="{{ route('dashboard') }}" class="ml-auto d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">Kembali ke Dashboard</a>
     </div>
     <div class="card-body">
         <a href="{{ route('akunKaryawan.tambah') }}" class="btn btn-primary mb-3">Tambahkan Akun Karyawan</a>

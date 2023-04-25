@@ -31,8 +31,9 @@ Route::get('/', function () {
 
 
 // ALl USER
-Route::controller(c_beranda::class)->prefix('beranda')->group(function () {
-    Route::get('', 'index')->name('beranda');
+Route::controller(c_beranda::class)->group(function () {
+    Route::get('beranda', 'index')->name('beranda');
+    Route::get('beranda-logged', 'index')->name('beranda.usaha')->middleware('multiAuth');
 });
 
 
@@ -80,6 +81,9 @@ Route::middleware(['multiAuth'])->group(function (){
         Route::get('edit/{username}', 'editKaryawan')->name('akunKaryawan.edit');
         Route::post('edit/{username}', 'editSimpanKaryawan')->name('akunKaryawan.edit.simpan');
     });
+
+    // Get Premium
+    route::get('', [c_akun::class, 'getPremium'])->name('getPremium');
     
     // fitur Produk
     Route::controller(c_produk::class)->prefix('produk')->group(function () {

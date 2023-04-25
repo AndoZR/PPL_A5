@@ -23,6 +23,7 @@ class multiAuth
             if ($user->hasVerifiedEmail() && in_array($user->status, ['free', 'premium'])) {
                 return $next($request);
             }
+            return redirect()->route('verification.notice');
         }
         
         // dd($user->hasVerifiedEmail());
