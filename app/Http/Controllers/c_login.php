@@ -40,7 +40,7 @@ class c_login extends Controller
                 ]);
             }
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('beranda');
         }
         elseif (strpos($request->username, 'KRYWN') !== false) {
             if (!Auth::guard('karyawan')->attempt($request->only(['username', 'password']))){
@@ -49,7 +49,7 @@ class c_login extends Controller
                 ]);
             }
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('beranda');
         }
         else{
             throw ValidationException::withMessages([

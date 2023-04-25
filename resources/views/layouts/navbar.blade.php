@@ -168,9 +168,9 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if (Auth::guard('web')->check())
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('web')->user()->username }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('web')->user()->nama_usaha }}</span>
                 @elseif (Auth::guard('karyawan')->check())
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('karyawan')->user()->username }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('karyawan')->user()->nama }}</span>
                 @endif
 
                 <img class="img-profile rounded-circle"
