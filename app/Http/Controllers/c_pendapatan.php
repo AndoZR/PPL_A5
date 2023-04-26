@@ -145,11 +145,15 @@ class c_pendapatan extends Controller
         if ($request->jumlah_produk < $stokReal) {
             produk::where('produk_id', $request->jenis_produk)
             ->increment('stok', $request->jumlah_produk);
+            produk::where('produk_id', $request->jenis_produk)
+            ->update(['updated_at' => now()]);
         }
         elseif ($request->jumlah_produk > $stokReal) {
 
             produk::where('produk_id', $request->jenis_produk)
             ->decrement('stok', $stokReal);
+            produk::where('produk_id', $request->jenis_produk)
+            ->update(['updated_at' => now()]);
         }
 
         if (Auth::guard('web')->check()){

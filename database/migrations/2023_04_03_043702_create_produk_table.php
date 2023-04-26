@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->date('tgl_exp');
             $table->string('deskripsi',100)->nullable();
-            $table->timestamp('updated_at');
+            $table->date('updated_at');
             $table->char('akun_usaha_username');
             $table->foreign('akun_usaha_username')->references('username')->on('users');
             $table->char('akun_karyawan_username')->nullable();

@@ -19,6 +19,7 @@
                         <th>Stok</th>
                         <th>Harga</th>
                         <th>Expired</th>
+                        <th>Diperbarui</th>
                         <th>Deskripsi</th>
                         <th >Aksi</th>
                     </tr>
@@ -33,6 +34,7 @@
                         <td>{{ $row->stok }}</td>
                         <td>{{ $row->harga }}</td>
                         <td>{{ $row->tgl_exp }}</td>
+                        <td>{{ $row->updated_at }}</td>
                         <td style="max-width:200px; height:100px">
                             <div style="height:100%; overflow: auto">
                                 {{ $row->deskripsi }}

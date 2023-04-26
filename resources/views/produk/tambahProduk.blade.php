@@ -39,6 +39,9 @@
 
                         <label for="tgl_exp">Expired</label>
                         <input type="date" class="form-control" id="tgl_exp" name="tgl_exp" value="{{ isset($produk) ? $produk->tgl_exp : '' }}">
+                        
+                        <label for="tgl_exp">Tanggal Dibuat</label>
+                        <input type="date" class="form-control" id="updated_at" name="updated_at" value="{{ isset($produk) ? $produk->updated_at : '' }}">
 
                         <label for="deskripsi">Deskripsi</label>
                         <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ isset($produk) ? $produk->deskripsi : '' }}">
