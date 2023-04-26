@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Agroperate | Beranda</title>
+  <title>Beranda | OPERATS</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -81,7 +81,7 @@
                 </a>
             </li>
           @else
-            <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
+            <li><a class="getstarted scrollto" href="{{ route('login') }}">Login Akun</a></li>
           @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -99,9 +99,13 @@
           <h1>Better Solutions For Your Agro Business</h1>
           <h2>Operats menyediakan layanan dan fitur penunjang bisnismu</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
+            @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
             <a href="{{ route('dashboard') }}" class="btn-get-started scrollto me-3">Mulai Beroperasi</a>
+            @else
+            <a href="{{ route('register') }}" class="btn-get-started scrollto me-3">Registrasi Akun</a>
+            @endif
             {{-- <a href="#about" class="btn-get-started scrollto">Mulai Beroperasi</a> --}}
-            {{-- <a href="#" class="glightbox btn-watch-video"><i class=""></i><span>Fitur Kami</span></a> --}}
+            {{-- <a href="#" class="getstarted glightbox btn-watch-video"><i class=""></i><span>Fitur Kami</span></a> --}}
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">

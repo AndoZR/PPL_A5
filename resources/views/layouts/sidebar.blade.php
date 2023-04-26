@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">AGROPERATE</div>
+        <div class="sidebar-brand-text mx-3">OPERATS</div>
     </a>
 
 {{-- fitur kelompok 1 --}}
@@ -157,7 +157,7 @@
     <!-- Sidebar Message buat ke premium -->
     <div class="sidebar-card d-none d-lg-flex">
         <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-        <p class="text-center mb-2"><strong>Agroperate</strong> memiliki fitur premium, aktifkan sekarang!</p>
+        <p class="text-center mb-2"><strong>OPERATS</strong> memiliki fitur premium, aktifkan sekarang!</p>
         <a class="btn btn-success btn-sm" href="{{ route('getPremium') }}">Get Premium!</a>
     </div> 
 @endif
