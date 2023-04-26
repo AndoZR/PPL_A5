@@ -31,6 +31,10 @@ class c_register extends Controller
             'kecamatan' => 'required',
         ])->validate();
 
+        if (User::where('nama_usaha', $request->nama_usaha)->first() || User::where('email', $request->email)->first() || User::where('nomor_handphone', $request->nomor_handphone)->first() || User::where('alamat', $request->alamat)->first()){
+            return redirect()->route('register')->with('message', 'Akun anda telah terdaftar! Gagal membuat akun baru!');
+        }
+
         // give id
         $front_username = 'USR';
         $i = 1;

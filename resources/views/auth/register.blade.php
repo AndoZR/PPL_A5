@@ -79,6 +79,15 @@
         'error'
     )
     </script>    
+@elseif (session('message'))
+    <script>
+        Swal.fire(
+        'Whoops',
+           `{{ session('message') }}`,
+        'error'
+    )
+    </script>    
 @endif
+
 </body>
 </html>
