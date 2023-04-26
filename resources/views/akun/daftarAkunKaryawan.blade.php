@@ -39,7 +39,7 @@
 @if (session('message'))
     <script>
         Swal.fire(
-        'Asekkkkk',
+        'Sukses!',
            `{{ session('message') }}`,
         'success'
     )

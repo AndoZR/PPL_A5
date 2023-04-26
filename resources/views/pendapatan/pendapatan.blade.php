@@ -80,11 +80,13 @@
 
 @if (session('message'))
     <script>
-        Swal.fire(
-        'Asekkkkk',
-           `{{ session('message') }}`,
-        'success'
-    )
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `{{ session('message') }}`,
+            showConfirmButton: false,
+            timer: 5000
+        })
     </script>    
 @endif 
 

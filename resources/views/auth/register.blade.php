@@ -81,11 +81,12 @@
     </script>    
 @elseif (session('message'))
     <script>
-        Swal.fire(
-        'Whoops',
-           `{{ session('message') }}`,
-        'error'
-    )
+        Swal.fire({
+            icon: 'error',
+            title: `{{ session('message') }}`,
+            showConfirmButton: false,
+            timer: 5000
+        })
     </script>    
 @endif
 

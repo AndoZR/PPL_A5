@@ -83,24 +83,26 @@
     @foreach ($errors->all() as $error)
         @if (strpos($error, 'required') !== false)
             <script>
-                Swal.fire(
-                    'Whoops',
-                    'Terdapat kolom yang tidak diisi',
-                    'error'
-                )
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Terdapat kolom yang belum diisi!',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
             </script>
         @else
             <script>
-                Swal.fire(
-                    'Whoops',
-                    'Tipe data yang dimasukkan salah',
-                    'error'
-                )
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Tipe data yang dimasukkan salah',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
             </script>
         @endif
     @endforeach
 @endif
-
-
 </body>
 @endsection

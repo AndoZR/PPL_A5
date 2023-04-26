@@ -50,18 +50,26 @@
             </div>
         </div>
     </section>
-@if ($errors->all())
+@if (session('message'))
     <script>
         Swal.fire({
+            position: 'center',
             icon: 'error',
-            title:            
-            `@foreach ($errors->all() as $items)
-                {{ $items }}
-                <?php break ?>
-            @endforeach`,
+            title: `{{ session('message') }}`,
             showConfirmButton: false,
-            timer: 3000
+            timer: 5000
         })
+    </script>   
+@elseif ($errors->all())
+    <script>
+        Swal.fire(
+        'Whoops',
+           `@foreach ($errors->all() as $items)
+                {{ $items }}
+            <?php break ?>
+            @endforeach`,
+        'error'
+        )
     </script>   
 @endif
 </body>

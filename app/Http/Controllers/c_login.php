@@ -34,28 +34,31 @@ class c_login extends Controller
 
         if (strpos($request->username, 'USR') !== false){
             if (!Auth::guard('web')->attempt($request->only(['username', 'password']))) {
-                throw ValidationException::withMessages([
-                    // 'username'=>trans('auth.failed')
-                    'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
-                ]);
+                // throw ValidationException::withMessages([
+                //     // 'username'=>trans('auth.failed')
+                //     'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
+                // ]);
+                return redirect()->route('login')->with('message', 'Username dan password tidak sesuai! Silahkan cek kembali!');
             }
             $request->session()->regenerate();
             return redirect()->route('beranda.usaha');
         }
         elseif (strpos($request->username, 'KRYWN') !== false) {
             if (!Auth::guard('karyawan')->attempt($request->only(['username', 'password']))){
-                throw ValidationException::withMessages([
-                    'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
-                ]);
+                // throw ValidationException::withMessages([
+                //     'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
+                // ]);
+                return redirect()->route('login')->with('message', 'Username dan password tidak sesuai! Silahkan cek kembali!');
             }
             $request->session()->regenerate();
             return redirect()->route('beranda');
         }
         else{
-            throw ValidationException::withMessages([
-                // 'username'=>trans('auth.failed')
-                'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
-            ]);
+            // throw ValidationException::withMessages([
+            //     // 'username'=>trans('auth.failed')
+            //     'username'=>'Username dan password tidak sesuai! Silahkan cek kembali!',
+            // ]);
+            return redirect()->route('login')->with('message', 'Username dan password tidak sesuai! Silahkan cek kembali!');
         }
     }
 

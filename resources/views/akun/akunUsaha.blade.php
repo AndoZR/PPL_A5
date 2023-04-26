@@ -61,8 +61,6 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         @if (Auth::guard('web')->check())
                             <h4 class="text-right">Halo {{ Auth::guard('web')->user()->nama_usaha }}</h4>
-                        @elseif (Auth::guard('karyawan')->check())
-                            <h4 class="text-right">Halo {{ Auth::guard('karyawan')->user()->nama }}</h4>
                         @endif
                         </div>
                     <div class="row mt-3">
@@ -95,7 +93,7 @@
 @if (session('message')))
     <script>
         Swal.fire(
-        'Whoops',
+        'Sukses!',
            `{{ session('message') }}`,
         'success'
     )

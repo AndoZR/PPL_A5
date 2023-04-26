@@ -56,7 +56,8 @@
             <div class="col-md-6">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Halo</h4>
+                        @if (Auth::guard('karyawan')->check())
+                        <h4 class="text-right">Halo {{ Auth::guard('karyawan')->user()->nama }}</h4>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12 mb-2"><label class="labels">Nama Usaha</label><input disabled type="text" class="form-control bg-white" value=""></div>

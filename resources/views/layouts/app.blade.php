@@ -134,11 +134,13 @@
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        'Terhapus!',
-                        'Data berhasil dihapus.',
-                        'success'
-                        )
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Data berhasil dihapus!',
+                        showConfirmButton: false,
+                        timer: 5000
+                    })
                     window.location.href = link;
                 }
                 })

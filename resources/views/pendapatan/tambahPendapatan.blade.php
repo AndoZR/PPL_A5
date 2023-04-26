@@ -41,16 +41,30 @@
 </form>
 
 {{-- define errors produk --}}
-@if ($errors->all())
-    <script>
-        Swal.fire(
-        'Whoops',
-           `@foreach ($errors->all() as $items)
-            <li>{{ $items }}</li>
-            @endforeach`,
-        'error'
-    )
-    </script>    
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        @if (strpos($error, 'required') !== false)
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Mohon mengisi form yang kosong!',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        @else
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Data yang dimasukkan salah! Mohon masukkan ulang!',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        @endif
+    @endforeach
 @endif
 
 @endsection

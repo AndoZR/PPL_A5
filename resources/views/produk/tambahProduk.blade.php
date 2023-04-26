@@ -38,7 +38,7 @@
                         <input type="text" class="form-control" id="harga" name="harga" value="{{ isset($produk) ? $produk->harga : '' }}">
 
                         <label for="tgl_exp">Expired</label>
-                        <input type="text" class="form-control" id="tgl_exp" name="tgl_exp" value="{{ isset($produk) ? $produk->tgl_exp : '' }}">
+                        <input type="date" class="form-control" id="tgl_exp" name="tgl_exp" value="{{ isset($produk) ? $produk->tgl_exp : '' }}">
 
                         <label for="deskripsi">Deskripsi</label>
                         <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ isset($produk) ? $produk->deskripsi : '' }}">
@@ -54,16 +54,30 @@
 </form>
 
 {{-- define errors produk --}}
-@if ($errors->all())
-    <script>
-        Swal.fire(
-        'Whoops',
-           `@foreach ($errors->all() as $items)
-            <li>{{ $items }}</li>
-            @endforeach`,
-        'error'
-    )
-    </script>    
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        @if (strpos($error, 'required') !== false)
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Nama, stok, harga, expired wajib diisi!',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        @else
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Data stok/harga/expired yang dimasukkan salah! Mohon masukkan ulang!',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        @endif
+    @endforeach
 @endif
 
 @endsection

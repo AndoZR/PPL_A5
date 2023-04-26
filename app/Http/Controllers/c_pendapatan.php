@@ -52,13 +52,15 @@ class c_pendapatan extends Controller
             'keterangan' => 'required', 
             'jenis_produk' => 'required', 
             'jumlah_produk' => 'required|integer', 
-        ],[
-            'tanggal.required'=>'tanggal wajib diisi',
-            'tanggal.date_format:Y-m-d'=>'tanggal wajib berformat tanggal',
-            'keterangan.required'=>'keterangan wajib diisi',
-            'jumlah_produk.required'=>'jumlah produk wajib diisi',
-            'jumlah_produk.integer'=>'jumlah produk hanya berisikan angka',
-        ]);
+        ],
+        // [
+        //     'tanggal.required'=>'tanggal wajib diisi',
+        //     'tanggal.date_format:Y-m-d'=>'tanggal wajib berformat tanggal',
+        //     'keterangan.required'=>'keterangan wajib diisi',
+        //     'jumlah_produk.required'=>'jumlah produk wajib diisi',
+        //     'jumlah_produk.integer'=>'jumlah produk hanya berisikan angka',
+        // ]
+    );
 
         // give id prd
         $kode_pendapatan = 'pdptn';

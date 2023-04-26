@@ -38,15 +38,17 @@ class c_produk extends Controller
             'stok' => 'required|integer', 
             'harga' => 'required|integer', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
-        ],[
-            'nama.required'=>'nama wajib diisi',
-            'stok.required'=>'stok wajib diisi',
-            'stok.integer'=>'stok hanya berisikan angka',
-            'harga.required'=>'harga wajib diisi',
-            'harga.integer'=>'harga hanya berisikan angka',
-            'tgl_exp.required'=>'expired wajib diisi',
-            'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
-        ]);
+        ],
+        // [
+        //     'nama.required'=>'nama wajib diisi',
+        //     'stok.required'=>'stok wajib diisi',
+        //     'stok.integer'=>'stok hanya berisikan angka',
+        //     'harga.required'=>'harga wajib diisi',
+        //     'harga.integer'=>'harga hanya berisikan angka',
+        //     'tgl_exp.required'=>'expired wajib diisi',
+        //     'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
+        // ]
+    );
 
         // give id prd
         $kode_produk = 'PRD';
@@ -108,15 +110,17 @@ class c_produk extends Controller
             'stok' => 'required|integer', 
             'harga' => 'required|integer', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
-        ],[
-            'nama.required'=>'nama wajib diisi',
-            'stok.required'=>'stok wajib diisi',
-            'stok.integer'=>'stok hanya berisikan angka',
-            'harga.required'=>'harga wajib diisi',
-            'harga.integer'=>'harga hanya berisikan angka',
-            'tgl_exp.required'=>'expired wajib diisi',
-            'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
-        ]);
+        ],
+        // [
+        //     'nama.required'=>'nama wajib diisi',
+        //     'stok.required'=>'stok wajib diisi',
+        //     'stok.integer'=>'stok hanya berisikan angka',
+        //     'harga.required'=>'harga wajib diisi',
+        //     'harga.integer'=>'harga hanya berisikan angka',
+        //     'tgl_exp.required'=>'expired wajib diisi',
+        //     'tgl_exp.date_format'=>'expired harus berformat "tahun-bulan-tanggal"',
+        // ]
+    );
 
         // get username of akun usaha
         if (Auth::guard('web')->check()){

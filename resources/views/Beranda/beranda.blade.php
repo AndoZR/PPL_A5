@@ -67,9 +67,9 @@
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
 
           @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
-              <!-- Nav Item - User Information #PERLU DI UPDATE -->
+              {{-- <!-- Nav Item - User Information #PERLU DI UPDATE -->
               <li class="nav-item dropdown no-arrow">
-                <a class="nav-link" href="#" id="userDropdown" role="button"
+                <a class="nav-link" href="{{ route('akunUsaha') }}" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                       @if (Auth::guard('web')->check())
@@ -78,8 +78,25 @@
                         {{ Auth::guard('karyawan')->user()->nama}}
                       @endif
                     </span>
+                    <img class="img-profile rounded-circle ms-2" style="width: 3vw; height: 3vw;"
+                    src="{{ asset('img/undraw_profile.svg') }}">
                 </a>
+            </li> --}}
+
+            <li class="dropdown"><a href="#"><span>
+              @if (Auth::guard('web')->check())
+                {{ Auth::guard('web')->user()->nama_usaha}}
+              @elseif (Auth::guard('karyawan')->check())
+                {{ Auth::guard('karyawan')->user()->nama}}
+              @endif  
+            </span>
+            <img class="img-profile rounded-circle ms-2" style="width: 3vw; height: 3vw;"
+            src="{{ asset('img/undraw_profile.svg') }}"></a>
+              <ul>
+                <li><a href="{{ route('akunUsaha') }}">Profile</a></li>
+                <li><a href="{{ route('logout') }}">Log Out</a></li>
             </li>
+
           @else
             <li><a class="getstarted scrollto" href="{{ route('login') }}">Login Akun</a></li>
           @endif
