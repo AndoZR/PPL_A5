@@ -58,7 +58,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Data yang dimasukkan salah! Mohon masukkan ulang!',
+                    title: 'Tipe data yang dimasukkan salah!',
                     showConfirmButton: false,
                     timer: 5000
                 })
