@@ -35,7 +35,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: chartDataProduk.label, //.concat(chartDataProdukBaru.label),
     datasets: [{
-      label: "Earnings",
+      label: "Total",
       lineTension: 0, // mengatur kelengkungan garis
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -80,7 +80,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'stok ' + number_format(value);
           }
         },
         gridLines: {
