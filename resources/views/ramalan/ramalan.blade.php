@@ -52,12 +52,12 @@
 </div>
 
 <script>
-    var chartDataProduk = {!! $produk !!};
+    var chartDataGrafik = {!! $dataGrafik !!};
     
     @if(isset($dataPrediksi))
-        var chartDataProdukBaru = {!! $dataPrediksi !!};
-        chartDataProduk.label = chartDataProduk.label.concat(chartDataProdukBaru.label);
-        chartDataProduk.data = chartDataProduk.data.concat(chartDataProdukBaru.data);
+        var chartDataGrafikBaru = {!! $dataPrediksi !!};
+        chartDataGrafik.label = chartDataGrafik.label.concat(chartDataGrafikBaru.label);
+        chartDataGrafik.data = chartDataGrafik.data.concat(chartDataGrafikBaru.data);
     @endif
 
 </script>

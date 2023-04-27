@@ -38,7 +38,6 @@ class c_produk extends Controller
             'stok' => 'required|integer', 
             'harga' => 'required|integer', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
-            'updated_at' => 'required|date_format:Y-m-d', 
         ],
         // [
         //     'nama.required'=>'nama wajib diisi',
@@ -74,7 +73,6 @@ class c_produk extends Controller
                 'stok'=>$request->stok,
                 'harga'=>$request->harga,
                 'tgl_exp'=>$request->tgl_exp,
-                'updated_at'=>$request->updated_at,
                 'deskripsi'=>$request->deskripsi,
                 'akun_usaha_username'=>Auth::guard('web')->user()->username,
             ];
@@ -88,7 +86,6 @@ class c_produk extends Controller
                 'stok'=>$request->stok,
                 'harga'=>$request->harga,
                 'tgl_exp'=>$request->tgl_exp,
-                'updated_at'=>$request->updated_at,
                 'deskripsi'=>$request->deskripsi,
                 'akun_usaha_username'=>$username_usaha,
                 'akun_karyawan_username'=>Auth::guard('karyawan')->user()->username
@@ -113,7 +110,6 @@ class c_produk extends Controller
             'stok' => 'required|integer', 
             'harga' => 'required|integer', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
-            'updated_at' => 'required|date_format:Y-m-d', 
         ],
         // [
         //     'nama.required'=>'nama wajib diisi',
@@ -135,7 +131,6 @@ class c_produk extends Controller
                 'stok'=>$request->stok,
                 'harga'=>$request->harga,
                 'tgl_exp'=>$request->tgl_exp,
-                'updated_at'=>$request->updated_at,
                 'deskripsi'=>$request->deskripsi,
                 'akun_usaha_username'=>Auth::guard('web')->user()->username,
             ];
@@ -149,7 +144,6 @@ class c_produk extends Controller
                 'stok'=>$request->stok,
                 'harga'=>$request->harga,
                 'tgl_exp'=>$request->tgl_exp,
-                'updated_at'=>$request->updated_at,
                 'deskripsi'=>$request->deskripsi,
                 'akun_usaha_username'=>$username_usaha,
                 'akun_karyawan_username'=>Auth::guard('karyawan')->user()->username

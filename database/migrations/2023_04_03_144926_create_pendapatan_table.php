@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('pendapatan', function (Blueprint $table) {
             $table->char('pendapatan_id')->primary();
             $table->date('tanggal');
-            $table->string('keterangan',100);
+            $table->string('keterangan',100)->nullable();
             $table->char('jenis_produk');
             $table->foreign('jenis_produk')->references('produk_id')->on('produk');
             $table->integer('jumlah_produk');
             $table->char('akun_usaha_username');
             $table->foreign('akun_usaha_username')->references('username')->on('users');
             $table->char('akun_karyawan_username')->nullable();
-            $table->foreign('akun_karyawan_username')->references('username')->on('karyawan');
+            $table->foreign('akun_karyawan_username')->references('username')->on('akun_karyawan');
         });
     }
 

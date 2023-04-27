@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transfer_bank', function (Blueprint $table) {
-            $table->integer('pembayaran_id')->primary();
-            $table->foreign('pembayaran_id')->references('pembayaran_id')->on('pembayaran');
-            $table->char('no_rekening');
-            $table->char('nama_pengirim');
-            $table->integer('transfer_bank_id')->unique();
+            // $table->integer('pembayaran_id')->primary();
+            // $table->foreign('pembayaran_id')->references('pembayaran_id')->on('pembayaran');
+            $table->string('no_rekening',50)->primary();
+            $table->string('nama_pengirim',50);
+            // $table->integer('transfer_bank_id')->unique();
             $table->integer('bank_id');
             $table->foreign('bank_id')->references('bank_id')->on('bank');
         });

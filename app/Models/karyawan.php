@@ -18,7 +18,7 @@ class karyawan extends Model
      * @var array<int, string>
      */
 
-    protected $table = 'karyawan';
+    protected $table = 'akun_karyawan';
 
     protected $primaryKey = 'username';
     protected $keyType = 'string';

@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gopay', function (Blueprint $table) {
-            $table->integer('pembayaran_id')->primary();
-            $table->foreign('pembayaran_id')->references('pembayaran_id')->on('pembayaran');
-            $table->char('nomor');
-            $table->char('username');
-            $table->integer('gopay_id')->unique();
+            // $table->integer('pembayaran_id')->primary();
+            // $table->foreign('pembayaran_id')->references('pembayaran_id')->on('pembayaran');
+            $table->char('nomor',13)->primary();
+            $table->string('username');
         });
     }
 

@@ -49,7 +49,6 @@ class c_pendapatan extends Controller
     {
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
-            'keterangan' => 'required', 
             'jenis_produk' => 'required', 
             'jumlah_produk' => 'required|integer', 
         ],
@@ -129,31 +128,28 @@ class c_pendapatan extends Controller
         // Validate
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
-            'keterangan' => 'required', 
             'jenis_produk' => 'required', 
             'jumlah_produk' => 'required|integer', 
         ],[
             'tanggal.required'=>'tanggal wajib diisi',
             'tanggal.date_format:Y-m-d'=>'tanggal wajib berformat tanggal',
-            'keterangan.required'=>'keterangan wajib diisi',
             'jumlah_produk.required'=>'jumlah produk wajib diisi',
             'jumlah_produk.integer'=>'jumlah produk hanya berisikan angka',
         ]);
 
-        // perkondisian edit untuk kalkulasi stok
-        $stokReal = pendapatan::where('pendapatan_id', $pendapatan_id)->value('jumlah_produk');
-        if ($request->jumlah_produk < $stokReal) {
-            produk::where('produk_id', $request->jenis_produk)
-            ->increment('stok', $request->jumlah_produk);
-            produk::where('produk_id', $request->jenis_produk)
-            ->update(['updated_at' => now()]);
-        }
-        elseif ($request->jumlah_produk > $stokReal) {
+        // kalo misal opsi produk dirubah, maka perkondisian if opsi permintaan tidak sama dengan yang asli dstr
 
+        // perkondisian edit untuk kalkulasi stok
+        $stokTerjual = pendapatan::where('pendapatan_id', $pendapatan_id)->value('jumlah_produk');
+        if ($request->jumlah_produk < $stokTerjual) {
+            $new_jumlah_stok = $stokTerjual - $request->jumlah_produk;
             produk::where('produk_id', $request->jenis_produk)
-            ->decrement('stok', $stokReal);
+            ->increment('stok', $new_jumlah_stok);
+        }
+        elseif ($request->jumlah_produk > $stokTerjual) {
+            $new_jumlah_stok = $request->jumlah_produk - $stokTerjual;
             produk::where('produk_id', $request->jenis_produk)
-            ->update(['updated_at' => now()]);
+            ->decrement('stok', $new_jumlah_stok);
         }
 
         if (Auth::guard('web')->check()){

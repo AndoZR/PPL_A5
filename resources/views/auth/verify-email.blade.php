@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- <meta http-equiv="refresh" content="1"> --}}
-    <title>Login | Agroperate</title>
+    <title>Verifikasi | OPERATS</title>
     <link rel="stylesheet" href="{{ url('assets/cssBootstrap/bootstrap.min.css') }}">
     <script src="{{ asset("assets/sweetalert2/dist/sweetalert2.all.min.js") }}"></script>
 </head>

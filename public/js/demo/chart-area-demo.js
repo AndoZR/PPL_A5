@@ -33,7 +33,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: chartDataProduk.label, //.concat(chartDataProdukBaru.label),
+    labels: chartDataGrafik.label, //.concat(chartDataGrafikBaru.label),
     datasets: [{
       label: "Total",
       lineTension: 0, // mengatur kelengkungan garis
@@ -47,7 +47,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: chartDataProduk.data, //.concat(chartDataProdukBaru.data),
+      data: chartDataGrafik.data, //.concat(chartDataGrafikBaru.data),
     }],
   },
   options: {

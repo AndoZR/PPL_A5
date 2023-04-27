@@ -26,7 +26,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 
 Route::get('/', function () {
-    return view('auth.coba');
+    return view('beranda.beranda');
 });
 
 
@@ -58,8 +58,8 @@ Route::controller(c_register::class)->prefix('register')->group(function () {
 });
 
 
-// ['auth:web', 'verified', 'checkStatus:premium,free']
 // ------------------------ USER PEMILIK USAHA DAN KARYAWAN FREE AND PREMIUM ONLY -----------------
+// ['auth:web', 'verified', 'checkStatus:premium,free']
 Route::middleware(['multiAuth'])->group(function (){
     Route::get('dashboard', [c_dashboard::class, 'index'])->name('dashboard');
     Route::get('logout', [c_login::class, 'logout'])->name('logout');
@@ -111,7 +111,7 @@ Route::middleware(['multiAuth'])->group(function (){
 // --------------------- USER PREMIUM ONLY ------------------------
 Route::middleware(['auth:web', 'verified', 'checkStatus:premium'])->group(function (){
     Route::controller(c_ramalan::class)->prefix('ramalan')->group(function () {
-        Route::get('', 'getProduk')->name('ramalan');
+        Route::get('', 'getPendapatanStok')->name('ramalan');
         Route::post('', 'Predict')->name('ramalan.predict');
     });
     

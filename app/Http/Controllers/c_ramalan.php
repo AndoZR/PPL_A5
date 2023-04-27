@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pendapatan;
 use App\Models\produk;
+use App\Models\pendapatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class c_ramalan extends Controller
 {
 
-    private $produk;
+    private $dataGrafik;
     private $dataAktual;
     private $dataPrediksi;
 
-    public function getProduk()
+    public function getPendapatanStok()
     {
         // $produk = produk::orderByRaw('MONTH(created_at) ASC')->get();
 
@@ -26,11 +27,23 @@ class c_ramalan extends Controller
         // // dd($this->produk);
         // return view('ramalan.ramalan', ['produk' => $this->produk]);
 
-        $produk = produk::orderByRaw('MONTH(updated_at) ASC')->get();
-        $grouped = $produk->groupBy(function ($item) {
-            return date('M', strtotime($item->updated_at));
-        });
-    
+
+        if (Auth::guard('web')->check())
+        {
+            $pendapatan = pendapatan::orderByRaw('MONTH(tanggal) ASC')->where('akun_usaha_username', Auth::guard('web')->user()->username)->get();
+            $grouped = $pendapatan->groupBy(function ($item) {
+                return date('M', strtotime($item->tanggal));
+            });
+        }
+        elseif (Auth::guard('karyawan')->check())
+        {
+            $username_usaha = Auth::guard('karyawan')->user()->akun_usaha_username;
+            $pendapatan = pendapatan::orderByRaw('MONTH(tanggal) ASC')->where('akun_usaha_username', $username_usaha)->get();
+            $grouped = $pendapatan->groupBy(function ($item) {
+                return date('M', strtotime($item->tanggal));
+            });
+        }
+
         $data = [
             'label' => [],
             'data' => []
@@ -38,13 +51,14 @@ class c_ramalan extends Controller
     
         foreach ($grouped as $bulan => $items) {
             $data['label'][] = $bulan;
-            $data['data'][] = $items->sum('stok');
+            $data['data'][] = $items->sum('jumlah_produk');
         }
+        
         $dataPrediksi = session('dataPrediksi');
         $this->dataAktual = $data['data'];
-        $this->produk = json_encode($data);
-        // dd($this->produk);
-        return view('ramalan.ramalan', ['produk' => $this->produk]);
+        $this->dataGrafik = json_encode($data);
+        // dd($this->dataGrafik);
+        return view('ramalan.ramalan', ['dataGrafik' => $this->dataGrafik]);
     }
 
     public function Predict(Request $request)
@@ -52,8 +66,9 @@ class c_ramalan extends Controller
         // ------------------- KALKULASI PREDIKSI -----------------
 
         // Data Time Series
-        // $data = array(10, 12, 14, 16, 18, 20, 22, 24, 26, 28);
-        $this->getProduk();
+        // $dataAktual = array(10, 12, 14, 16, 18, 20, 22, 24, 26, 28);
+        // $dataAktual = array(10, 12, 13, 16, 19, 23, 26, 30, 28, 18, 16, 14);
+        $this->getPendapatanStok();
         $dataAktual = $this->dataAktual;
 
         // Konstanta Alpha
@@ -110,7 +125,7 @@ class c_ramalan extends Controller
         $this->dataPrediksi = json_encode($data);
 
         return view('ramalan.ramalan')->with([
-            'produk' => $this->produk,
+            'dataGrafik' => $this->dataGrafik,
             'dataPrediksi' => $this->dataPrediksi,
             'mape' => $mape,
         ]);
