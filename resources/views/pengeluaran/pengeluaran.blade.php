@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Pendapatan')
+@section('title', 'Fitur Pengeluaran')
 
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pendapatan</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Pengeluaran</h6>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-4">
-                <a href="{{ route('pendapatan.tambah') }}" class="btn btn-primary mb-3">Tambahkan Pendapatan</a>
+                <a href="{{ route('pengeluaran.tambah') }}" class="btn btn-primary mb-3">Tambahkan Pengeluaran</a>
             </div>
             <div class="col-8">
-                <h4>Total Pendapatan: Rp {{ $jumlahPendapatan }}</h4>
+                <h4>Total pengeluaran: Rp {{ $jumlahPengeluaran }}</h4>
             </div>
             <div class="col-12">
-                <form action="{{ route('pendapatan.dateFilter') }}" method="POST">
+                <form action="{{ route('pengeluaran.dateFilter') }}" method="POST">
                     @csrf
                     <div class="container">
                         <div class="row">
@@ -46,29 +46,27 @@
                     <tr>
                         <th>no</th>
                         <th>Tanggal</th>
+                        <th>Nominal</th>
                         <th>Keterangan</th>
-                        <th>Jenis Produk</th>
-                        <th>Jumlah Produk</th>
                         <th>Aksi</th>
                         {{-- <th>Akun Usaha</th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @php($no = 1)
-                    @foreach ($pendapatan as $row)
+                    @foreach ($pengeluaran as $row)
                     <tr>
                         <th>{{ $no++ }}</th>
                         <td>{{ $row->tanggal }}</td>
+                        <td>{{ $row->nominal }}</td>
                         <td style="max-width:200px; height:100px">
                             <div style="height:100%; overflow: auto">
                                 {{ $row->keterangan }}
                             </div>
                         </td>
-                        <td>{{ DB::table('produk')->where('produk_id', $row->jenis_produk)->value('nama') }}</td>
-                        <td>{{ $row->jumlah_produk }}</td>
                         <td style="max-width:95px">
-                            <a href="{{ route('pendapatan.edit', $row->pendapatan_id) }}" class="btn btn-warning" >Edit</a>
-                            <a href="{{ route('pendapatan.hapus', $row->pendapatan_id) }}" class="btn btn-danger" id="sweetDelete">Hapus</a>
+                            <a href="{{ route('pengeluaran.edit', $row->pengeluaran_id) }}" class="btn btn-warning" >Edit</a>
+                            <a href="{{ route('pengeluaran.hapus', $row->pengeluaran_id) }}" class="btn btn-danger" id="sweetDelete">Hapus</a>
                         </td>
                     </tr>
                     @endforeach

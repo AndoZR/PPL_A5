@@ -8,7 +8,9 @@ use App\Http\Controllers\c_beranda;
 use App\Http\Controllers\c_register;
 use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\c_dashboard;
+use App\Http\Controllers\c_knapsack;
 use App\Http\Controllers\c_pendapatan;
+use App\Http\Controllers\c_pengeluaran;
 use App\Http\Controllers\c_ramalan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
@@ -34,6 +36,7 @@ Route::get('/', function () {
 Route::controller(c_beranda::class)->group(function () {
     Route::get('beranda', 'index')->name('beranda');
     Route::get('beranda-logged', 'index')->name('beranda.usaha')->middleware('multiAuth');
+    Route::post('', 'sendMessage')->name('sendMessage');
 });
 
 
@@ -105,14 +108,33 @@ Route::middleware(['multiAuth'])->group(function (){
         Route::get('hapus/{pendapatan_id}', 'hapus')->name('pendapatan.hapus'); 
         Route::post('', 'dateFilter')->name('pendapatan.dateFilter');
     });
+
+    // fitur pengeluaran
+    Route::controller(c_pengeluaran::class)->prefix('pengeluaran')->group(function () {
+        Route::get('','index')->name('pengeluaran');
+        Route::get('tambah','tambah')->name('pengeluaran.tambah');
+        Route::post('tambah','simpan')->name('pengeluaran.tambah.simpan');
+        Route::get('edit/{pengeluaran_id}', 'edit')->name('pengeluaran.edit'); 
+        Route::post('edit/{pengeluaran_id}', 'update')->name('pengeluaran.edit.update'); 
+        Route::get('hapus/{pengeluaran_id}', 'hapus')->name('pengeluaran.hapus'); 
+        Route::post('', 'dateFilter')->name('pengeluaran.dateFilter');
+    });
 });
 
 
 // --------------------- USER PREMIUM ONLY ------------------------
 Route::middleware(['auth:web', 'verified', 'checkStatus:premium'])->group(function (){
+    // Ramalan
     Route::controller(c_ramalan::class)->prefix('ramalan')->group(function () {
         Route::get('', 'getPendapatanStok')->name('ramalan');
         Route::post('', 'Predict')->name('ramalan.predict');
+    });
+
+    // knapsack
+    Route::controller(c_knapsack::class)->prefix('knapsack')->group(function () {
+        Route::get('', 'index_knapsack')->name('knapsack');
+        Route::get('data', 'index_data')->name('dataKnapsack');
+        
     });
     
 });

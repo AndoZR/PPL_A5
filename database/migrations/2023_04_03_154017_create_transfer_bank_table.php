@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('no_rekening',50)->primary();
             $table->string('nama_pengirim',50);
             // $table->integer('transfer_bank_id')->unique();
-            $table->integer('bank_id');
+            $table->string('bank_id',10);
             $table->foreign('bank_id')->references('bank_id')->on('bank');
         });
     }

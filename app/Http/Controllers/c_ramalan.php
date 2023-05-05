@@ -43,8 +43,9 @@ class c_ramalan extends Controller
                 return date('M', strtotime($item->tanggal));
             });
         }
-
+        // dd($grouped);
         $data = [
+        
             'label' => [],
             'data' => []
         ];
@@ -67,7 +68,6 @@ class c_ramalan extends Controller
 
         // Data Time Series
         // $dataAktual = array(10, 12, 14, 16, 18, 20, 22, 24, 26, 28);
-        // $dataAktual = array(10, 12, 13, 16, 19, 23, 26, 30, 28, 18, 16, 14);
         $this->getPendapatanStok();
         $dataAktual = $this->dataAktual;
 

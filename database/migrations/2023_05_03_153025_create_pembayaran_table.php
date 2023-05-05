@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pembayaran', function (Blueprint $table) {
-            $table->char('pembayaran_id')->primary();
+            $table->string('pembayaran_id',50)->primary();
             $table->date('timestamp');
             $table->integer('nominal');
-            $table->string('akun_usaha_username',10);
-            $table->foreign('akun_usaha_username')->references('username')->on('akun_usaha');
+            $table->string('akun_usaha_username',20);
+            $table->foreign('akun_usaha_username')->references('username')->on('users');
             $table->string('transfer_bank_no_rekening',50);
             $table->foreign('transfer_bank_no_rekening')->references('no_rekening')->on('transfer_bank');
-            $table->char('gopay_nomor',13);
+            $table->string('gopay_nomor',13);
             $table->foreign('gopay_nomor')->references('nomor')->on('gopay');
         });
     }

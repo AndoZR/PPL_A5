@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengeluaran', function (Blueprint $table) {
-            $table->string('pengeluaran_id',50)->primary();
-            $table->date('tanggal');
-            $table->integer('nominal');
-            $table->string('keterangan',100);
+        Schema::create('knapsack', function (Blueprint $table) {
+            $table->string('knapsack_id', 50)->primary();
+            $table->integer('stok_baru');
+            $table->string('pendapatan_id',50);
+            $table->foreign('pendapatan_id')->references('pendapatan_id')->on('pendapatan');
             $table->string('akun_usaha_username',20);
             $table->foreign('akun_usaha_username')->references('username')->on('users');
-            $table->string('akun_karyawan_username',20)->nullable();
-            $table->foreign('akun_karyawan_username')->references('username')->on('akun_karyawan');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengeluaran');
+        Schema::dropIfExists('knapsack');
     }
 };

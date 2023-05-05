@@ -62,7 +62,7 @@ class c_pendapatan extends Controller
     );
 
         // give id prd
-        $kode_pendapatan = 'pdptn';
+        $kode_pendapatan = 'PDPTN';
         $i = 1;
         while ($i >= 0) {
             $pendapatan_id = $kode_pendapatan . $i;
