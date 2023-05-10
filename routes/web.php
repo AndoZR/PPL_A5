@@ -129,12 +129,17 @@ Route::middleware(['auth:web', 'verified', 'checkStatus:premium'])->group(functi
         Route::get('', 'getPendapatanStok')->name('ramalan');
         Route::post('', 'Predict')->name('ramalan.predict');
     });
-
+    
     // knapsack
     Route::controller(c_knapsack::class)->prefix('knapsack')->group(function () {
         Route::get('', 'index_knapsack')->name('knapsack');
         Route::get('data', 'index_data')->name('dataKnapsack');
-        
+        Route::get('tambah', 'tambahKnapsack')->name('knapsack.tambah');
+        Route::post('tambah','simpan')->name('knapsack.tambah.simpan');
+        Route::get('edit/{knapsack_id}', 'edit')->name('knapsack.edit'); 
+        Route::post('edit/{knapsack_id}', 'update')->name('knapsack.edit.update'); 
+        Route::get('hapus/{knapsack_id}', 'hapus')->name('knapsack.hapus'); 
+        Route::post('process', 'process_knapsack')->name('knapsack.process');
     });
     
 });
@@ -145,6 +150,8 @@ Route::middleware(['auth:web', 'verified', 'checkStatus:premium'])->group(functi
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
+
+// --> MustVerifyEmail.php , EmailVerificationRequest.php , VerifyEmail.php
 
 // --------------------- The Email Verification Handler ----------------
 Route::get('/email/verify/{username}/{hash}', function (EmailVerificationRequest $request,$username) {

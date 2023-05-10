@@ -113,7 +113,8 @@ class c_pendapatan extends Controller
         if (Auth::guard('web')->check()){
             $jenis_produk = produk::where('akun_usaha_username', Auth::guard('web')->user()->username)->get();
             $dataPendapatan = pendapatan::where('pendapatan_id', $pendapatan_id)->firstOrFail();
-            return view('pendapatan.tambahPendapatan', ['pendapatan'=>$dataPendapatan,'jenis_produk'=>$jenis_produk]);
+            $produk_ftPendapatan = produk::where('produk_id', $dataPendapatan->jenis_produk)->first();
+            return view('pendapatan.tambahPendapatan', ['pendapatan'=>$dataPendapatan,'jenis_produk'=>$jenis_produk, 'produk_ftPendapatan'=>$produk_ftPendapatan]);
         }
         elseif (Auth::guard('karyawan')->check()){
             $username_usaha = Auth::guard('karyawan')->user()->akun_usaha_username;
@@ -191,7 +192,7 @@ class c_pendapatan extends Controller
         ->increment('stok', $jumlah_produk);
 
         pendapatan::where('pendapatan_id', $pendapatan_id)->delete();
-        return redirect()->route('pendapatan');
+        return redirect()->route('pendapatan')->with('message','Data berhasil dihapus');
     }
 
     public function dateFilter(Request $request)

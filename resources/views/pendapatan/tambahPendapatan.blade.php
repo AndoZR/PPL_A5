@@ -21,9 +21,13 @@
 
                         <label class="form-label" for="jenis_produk">Jenis Produk</label>
                         <select class="form-control form-select" name="jenis_produk">
-                            <option value="">Pilih Produk</option>
+                            <option value="{{ isset($produk_ftPendapatan) ? $produk_ftPendapatan->produk_id : ''}}">{{ isset($produk_ftPendapatan) ? $produk_ftPendapatan->nama : 'Pilih Produk' }}</option>
                             @foreach ($jenis_produk as $item)
-                            <option value="{{ $item->produk_id }}">{{ $item->nama }}</option>
+                                @if (isset($produk_ftPendapatan) && $item->nama == $produk_ftPendapatan->nama)
+                                    
+                                @else
+                                    <option value="{{ $item->produk_id }}">{{ $item->nama }}</option>     
+                                @endif
                             @endforeach
                         </select>
 

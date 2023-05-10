@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>no</th>
@@ -22,25 +22,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @php($no = 1)
-                    @foreach ($produk as $row)
+                    @php($no = 1)
+                    @foreach ($table as $row)
                     <tr>
                         <th>{{ $no++ }}</th>
                         <td>{{ $row->nama }}</td>
-                        <td>{{ $row->stok }}</td>
                         <td>{{ $row->harga }}</td>
-                        <td>{{ $row->tgl_exp }}</td>
-                        <td style="max-width:200px; height:100px">
-                            <div style="height:100%; overflow: auto">
-                                {{ $row->deskripsi }}
-                            </div>
-                        </td>
+                        <td>{{ $row->permintaan }}</td>
+                        <td>{{ $row->permintaan*$row->harga }}</td>
+                        <td>{{ $row->stok_baru }}</td>
                         <td style="max-width:95px">
-                            <a href="{{ route('produk.edit', $row->produk_id) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ route('produk.hapus', $row->produk_id) }}" class="btn btn-danger" id="sweetDelete">Hapus</a>
+                            <a href="{{ route('knapsack.edit', $row->knapsack_id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('knapsack.hapus', $row->knapsack_id) }}" class="btn btn-danger" id="sweetDelete">Hapus</a>
                         </td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

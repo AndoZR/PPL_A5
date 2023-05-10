@@ -742,7 +742,7 @@
 
         <div class="row">
 
-          <div class="col-lg-5 d-flex align-items-stretch">
+          <div class="col-lg-6 d-flex align-items-stretch">
             <div class="info">
 
               <div class="email">
@@ -764,7 +764,7 @@
 
           </div>
 
-          <div class="col-lg-7 rounded bg-white shadow">
+          <div class="col-lg-6 rounded bg-white shadow">
             <form action="{{ route('sendMessage') }}" class="m-5" method="post">
               @csrf
               <div class="row">
