@@ -17,7 +17,10 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
-    
+
+    <!-- bootstrap icon link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <!-- sweetalert2 js -->
     <script src="{{ asset("assets/sweetalert2/dist/sweetalert2.all.min.js") }}"></script>
 
@@ -31,7 +34,7 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
+    <!-- Chart js -->
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 
 </head>
@@ -148,7 +151,9 @@
     });
 </script>
 
-<!-- SCRIPT FOR AREA CHART -->
+<!-- SCRIPT FOR CHART -->
 <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+<script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
+<script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
 
 </html>

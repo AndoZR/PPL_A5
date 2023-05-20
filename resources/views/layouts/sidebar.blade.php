@@ -28,14 +28,20 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('pendapatan') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-money-bill"></i>
             <span>Pendapatan</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('pengeluaran') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-money-bill-wave"></i>
             <span>Pengeluaran</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('keuangan') }}">
+            <i class="fas fa-fw fa-cash-register"></i>
+            <span>Keuangan</span></a>
     </li>
 </div>
     

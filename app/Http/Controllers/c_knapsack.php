@@ -64,7 +64,7 @@ class c_knapsack extends Controller
     public function simpan(Request $request)
     {
         $request->validate([
-            'stok_baru' => 'required', 
+            'stok_baru' => 'required|integer', 
             'jenis_produk' => 'required', 
             ],
         );
@@ -93,7 +93,7 @@ class c_knapsack extends Controller
         }
         
         knapsack::create($data);
-        return redirect()->route('knapsack')->with('message', 'Data berhasil disimpan!');
+        return redirect()->route('dataKnapsack')->with('message', 'Data berhasil disimpan!');
     }
 
     public function edit($knapsack_id)
@@ -109,7 +109,7 @@ class c_knapsack extends Controller
     public function update($knapsack_id, Request $request)
     {
         $request->validate([
-            'stok_baru' => 'required', 
+            'stok_baru' => 'required|integer', 
             'jenis_produk' => 'required', 
             ],
         );

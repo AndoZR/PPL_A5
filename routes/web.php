@@ -8,6 +8,7 @@ use App\Http\Controllers\c_beranda;
 use App\Http\Controllers\c_register;
 use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\c_dashboard;
+use App\Http\Controllers\c_keuangan;
 use App\Http\Controllers\c_knapsack;
 use App\Http\Controllers\c_pendapatan;
 use App\Http\Controllers\c_pengeluaran;
@@ -118,6 +119,12 @@ Route::middleware(['multiAuth'])->group(function (){
         Route::post('edit/{pengeluaran_id}', 'update')->name('pengeluaran.edit.update'); 
         Route::get('hapus/{pengeluaran_id}', 'hapus')->name('pengeluaran.hapus'); 
         Route::post('', 'dateFilter')->name('pengeluaran.dateFilter');
+    });
+
+    // fitur keuangan (pendapatan - pengeluaran)
+    Route::controller(c_keuangan::class)->prefix('keuangan')->group(function () {
+        Route::get('','index')->name('keuangan');
+        Route::post('calculate','calculate')->name('keuangan.calculate');
     });
 });
 

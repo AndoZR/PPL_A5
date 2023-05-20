@@ -42,47 +42,33 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          {{-- <li><a class="nav-link scrollto" href="#about">About</a></li> --}}
-          {{-- <li><a class="nav-link scrollto" href="#services">Services</a></li> --}}
-          {{-- <li><a href="{{ route('produk') }}">Produk</a></li> --}}
-          {{-- <li><a class="nav-link scrollto" href="#portfolio">Ramalan</a></li> --}}
-          <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{{ route('produk') }}">Produk</a></li>
-              {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul> --}}
-              </li>
-              <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
-              @if (Auth::guard('web')->check() && Auth::guard('web')->user()->status === 'premium' )
-              <li><a href="{{ route('ramalan') }}">Ramalan</a></li>
+          <!-- notif -->
+          <li class="dropdown">
+            <a style="color: white"><i class="bi bi-bell"></i></a>
+            <ul style="max-width:500px; max-height:300px; overflow-y: auto;">
+              @if(isset($collectnotif))
+                @foreach ($collectnotif as $item)
+                  <li><a href="#">{{ $item }}</a></li>  
+                @endforeach
               @endif
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
+
+          <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{{ route('produk') }}">Produk</a></li>
+              <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
+              <li><a href="{{ route('keuangan') }}">Keuangan</a></li>
+              @if (Auth::guard('web')->check() && Auth::guard('web')->user()->status === 'premium' )
+              <li><a href="{{ route('ramalan') }}">Ramalan</a></li>
+              <li><a href="{{ route('knapsack') }}">Knapsack</a></li>
+              @endif
+            </li>
+          </ul>
+
+        <li><a class="nav-link scrollto" href="#contact">Bantuan</a></li>
 
           @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
-              {{-- <!-- Nav Item - User Information #PERLU DI UPDATE -->
-              <li class="nav-item dropdown no-arrow">
-                <a class="nav-link" href="{{ route('akunUsaha') }}" id="userDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                      @if (Auth::guard('web')->check())
-                        {{ Auth::guard('web')->user()->nama_usaha}}
-                      @elseif (Auth::guard('karyawan')->check())
-                        {{ Auth::guard('karyawan')->user()->nama}}
-                      @endif
-                    </span>
-                    <img class="img-profile rounded-circle ms-2" style="width: 3vw; height: 3vw;"
-                    src="{{ asset('img/undraw_profile.svg') }}">
-                </a>
-            </li> --}}
-
             <li class="dropdown"><a href="#"><span>
               @if (Auth::guard('web')->check())
                 {{ Auth::guard('web')->user()->nama_usaha}}
@@ -276,10 +262,18 @@
             <div class="accordion-list">
               <ul>
                 <li>
-                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Ramalan Stok <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#PREMIUMaccordion-list-1"><span>01</span> Ramalan Stok <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="PREMIUMaccordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                     <p>
                       Fitur ini dapat membantu Anda memprefiksi stok produk bisnis Anda dengan metode Eksponensial Smoothing supaya Anda dapat mengambil keputusan dari hasil prediksi.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#accordion-list-2"><span>02</span> Knapsack Problem <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-2" class="collapse show" data-bs-parent=".accordion-list">
+                    <p>
+                      Fitur ini dapat membantu Anda menyelesaikan pemilihan produk yang membantu peningkatan penjualan serta tanpa melebihi kapasitas gudang stok anda. Fitur ini memperhitungkan segala kemungkinan dengan memerhatikan indikator pendapatan tertinggi dari penjualan produk serta produk baru yang akan di masukkan ke gudang.
                     </p>
                   </div>
                 </li>
@@ -737,7 +731,7 @@
 
         <div class="section-title">
           <h2>Bantuan</h2>
-          <p>Sampaikan kendalamu dalam menggunakan fitur OPERATS agar kami dapat segera melakukan maintenance terhadap masalah Anda. Sampaikan kendala Anda dengan detail melalui pesan dalam form kontak di bawah ini!</p>
+          <p>Sampaikan kendalamu dalam menggunakan fitur OPERATS agar kami dapat segera melakukan maintenance terhadap masalah Anda. Sampaikan kendala Anda dengan detail melalui pesan dalam form di bawah ini!</p>
         </div>
 
         <div class="row">

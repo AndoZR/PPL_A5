@@ -16,24 +16,12 @@ class c_ramalan extends Controller
 
     public function getPendapatanStok()
     {
-        // $produk = produk::orderByRaw('MONTH(created_at) ASC')->get();
-
-        // foreach($produk as $item){
-        //     $data['label'][] = date('M', strtotime($item->created_at));
-        //     $data['data'][] = (int) $item->stok;
-        // }
-        // // dd($data);
-        // $this->produk = json_encode($data);
-        // // dd($this->produk);
-        // return view('ramalan.ramalan', ['produk' => $this->produk]);
-
-
         if (Auth::guard('web')->check())
         {
             $pendapatan = pendapatan::orderByRaw('MONTH(tanggal) ASC')->where('akun_usaha_username', Auth::guard('web')->user()->username)->get();
             $grouped = $pendapatan->groupBy(function ($item) {
                 return date('M', strtotime($item->tanggal));
-            });
+            });            
         }
         elseif (Auth::guard('karyawan')->check())
         {
@@ -55,7 +43,6 @@ class c_ramalan extends Controller
             $data['data'][] = $items->sum('jumlah_produk');
         }
         
-        $dataPrediksi = session('dataPrediksi');
         $this->dataAktual = $data['data'];
         $this->dataGrafik = json_encode($data);
         // dd($this->dataGrafik);
