@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('beranda') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('beranda.usaha') }}">
         <div class="sidebar-brand-icon">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -46,7 +46,7 @@
 </div>
     
 
-@if (Auth::guard('web')->check() && Auth::guard('web')->user()->status == 'premium')
+@if (Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->status, ['sts2','sts3']))
 <!-- Fitur Premium -->
 <div>
     <hr class="sidebar-divider">
@@ -180,12 +180,12 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div> --}}
 
-@if (Auth::guard('web')->check() && Auth::guard('web')->user()->status == 'free')
+@if (Auth::guard('web')->check() && Auth::guard('web')->user()->status == 'sts1')
     <!-- Sidebar Message buat ke premium -->
     <div class="sidebar-card d-none d-lg-flex">
         <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
         <p class="text-center mb-2"><strong>OPERATS</strong> memiliki fitur premium, aktifkan sekarang!</p>
-        <a class="btn btn-success btn-sm" href="{{ route('getPremium') }}">Get Premium!</a>
+        <a class="btn btn-success btn-sm" href="#" onclick="redirectToPremium()">Get Premium!</a>
     </div> 
 @endif
 
@@ -198,3 +198,10 @@
 </div>
 
 </ul>
+
+<script>
+    function redirectToPremium() {
+       // Arahkan pengguna ke halaman tujuan
+       window.location.href = "{{ route('berandaPricing') }}";
+    }
+</script>

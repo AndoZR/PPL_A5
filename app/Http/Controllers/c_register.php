@@ -21,7 +21,7 @@ class c_register extends Controller
     {
         // dd($request->provinsi);
         Validator::make($request->all(), [
-            'password' => 'required',
+            'password' => 'required|max:50',
             'nama_usaha' => 'required',
             'alamat' => 'required',
             'nomor_handphone' => 'required|numeric',
@@ -56,7 +56,7 @@ class c_register extends Controller
             'alamat' => $request->alamat,
             'nomor_handphone' => $request->nomor_handphone,
             'email' => $request->email,
-            'status' => 'free',
+            'status' => 'sts1',
             'kecamatan_id' => $request->kecamatan
         ]);
 

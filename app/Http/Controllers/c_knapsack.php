@@ -183,7 +183,12 @@ class c_knapsack extends Controller
             $items = [];
 
             foreach ($data_knapsack as $data) {
-                $items[] = ['nama' => $data['nama'],'stok_lama' => $data['permintaan'], 'stok_baru' => $data['stok_baru'], 'harga' => $data['harga']];
+                $items[] = [
+                'nama' => $data['nama'],
+                'stok_lama' => $data['permintaan'], 
+                'stok_baru' => $data['stok_baru'], 
+                'harga' => $data['harga']
+                ];
             }
             
             $capacity = $request->kapasitas;

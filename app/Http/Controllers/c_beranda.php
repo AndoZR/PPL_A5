@@ -35,13 +35,13 @@ class c_beranda extends Controller
                 if ($currentTimestamp > $expiredTimestamp) {
                     $days = -$days; // Tambahkan tanda negatif jika tanggal kedaluwarsa telah terlewati
                 }
-
+                
                 if ($days <= 0) {
                     $getNotifExpired = '[PERINGATAN], produk "' . $data->nama . '" telah kadaluwarsa. Segera tangani lebih lanjut!';
                     $collectnotif[] = $getNotifExpired;
                 }
             }
-
+            return view('beranda.beranda')->with('collectnotif', $collectnotif);
         }
 
         elseif (Auth::guard('karyawan')->check()) {
@@ -71,9 +71,10 @@ class c_beranda extends Controller
                     $collectnotif[] = $getNotifExpired;
                 }
             }
+            return view('beranda.beranda')->with('collectnotif', $collectnotif);
         }
         
-        return view('beranda.beranda')->with('collectnotif', $collectnotif);
+        return view('beranda.beranda');
     }
 
     public function sendMessage(Request $request)
@@ -104,4 +105,23 @@ class c_beranda extends Controller
         return back()->with('message', 'Pengaduan berhasil dikirim!');
     }
 
+    protected function index_2(){
+        $isPrice = 1;
+        return view('beranda.beranda')->with('isPrice',$isPrice);
+    }
+
+    // get premium
+    protected function pricing_premium(){
+        Auth::guard('web')->user()->update([
+            'status' => 'sts2'
+        ]);
+        return redirect()->route('dashboard');
+    }
+
+    protected function pricing_premiumPro(){
+        Auth::guard('web')->user()->update([
+            'status' => 'sts3'
+        ]);
+        return redirect()->route('dashboard');
+    }
 }

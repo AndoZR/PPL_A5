@@ -26,46 +26,58 @@
                 <br>
                 <b>Kapasitas Gudang: {{ isset($result) ? ($kapasitas) : '0' }}</b>
                 <br>
-                @if (isset($result))
-                    @foreach ($result['selectedItems'] as $item)
-                        >> Rekomen Produk({{ $item['nama'] }}) <br>
-                        - Pendapatan: {{ $item['pendapatan'] }} <br>
-                        - Stok Baru: {{ $item['stok_baru'] }} <br>
-                        <br>
-                    @endforeach
-                @endif    
-                @if (isset($result))
-                    @foreach ($result['selectedItems'] as $item)
-                        <!-- Tasks Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{ $item['nama'] }}
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ floor(($item['stok_baru']/$kapasitas)*100) }}%</div>
+                <div class="row">
+                    @if (isset($result))
+                        @foreach ($result['selectedItems'] as $item)
+                            <!-- Tasks Card Example -->
+                            <div class="col-xl-6 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{ $item['nama'] }} - {{ $item['stok_baru'] }} stok
                                                 </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: {{ $item['stok_baru'] }}%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ floor(($item['stok_baru']/$kapasitas)*100) }}%</div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar"
+                                                                style="width: {{ $item['stok_baru'] }}%" aria-valuenow="50" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                @endif    
+
+                            <!-- Earnings Card -->
+                            <div class="col-xl-6 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Pendapatan</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ $item['pendapatan'] }}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif  
+                </div>  
             </div>
         </div>
     </div>
@@ -78,8 +90,8 @@
                     <button type="submit" class="btn btn-primary ml-auto"><i class="bi bi-calculator-fill"></i> Hitung</button>
                 </div>
                 <div class="card-body">
-                    <label class="form-label text-gray-900" for="kapasitas">Kapasitas Stok Gudang</label>
-                    <input class="form-control" type="number" min="0" id="kapasitas" name="kapasitas">
+                    <label class="form-label text-gray-900" for="kapasitas">Kapasitas Gudang</label>
+                    <input class="form-control" type="number" min="0" id="kapasitas" name="kapasitas" placeholder="stok">
 
                     {{-- <label class="form-label text-gray-900" for="alpha">Konstanta Perataan α (0-1)</label>
                     <input class="form-control" type="number" onkeydown="return false" min="0" max="1" step="0.1" id="alpha" name="alpha"> --}}

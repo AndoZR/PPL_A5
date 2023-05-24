@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->string('username',20)->primary();
             $table->string('password');
-            $table->char('nama_usaha');
-            $table->char('alamat');
-            $table->char('nomor_handphone',13);
-            $table->char('email');
-            $table->char('status',7);
-            $table->char('kecamatan_id',7);
+            $table->string('nama_usaha');
+            $table->string('alamat',100);
+            $table->string('nomor_handphone',13);
+            $table->string('email',50);
+            $table->string('status',4);
+            $table->foreign('status')->references('status_akun_id')->on('status_akun');
+            $table->string('kecamatan_id',7);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

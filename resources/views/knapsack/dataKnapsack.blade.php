@@ -28,12 +28,13 @@
                         <th>{{ $no++ }}</th>
                         <td>{{ $row->nama }}</td>
                         <td>{{ $row->harga }}</td>
-                        <td>{{ $row->permintaan }}</td>
+                        <td>@if ($row->permintaan === null) 0 @else {{ $row->permintaan }} @endif</td>
                         <td>{{ $row->permintaan*$row->harga }}</td>
                         <td>{{ $row->stok_baru }}</td>
                         <td style="max-width:95px">
-                            <a href="{{ route('knapsack.edit', $row->knapsack_id) }}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="{{ route('knapsack.hapus', $row->knapsack_id) }}" class="btn btn-danger" id="sweetDelete"><i class="bi bi-trash"></i></a>
+                            <a href="{{ route('knapsack.edit', $row->knapsack_id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('knapsack.hapus', $row->knapsack_id) }}" class="btn btn-danger" id="sweetDelete">Hapus</a>
+                            {{-- <a href="{{ route('knapsack.hapus', $row->knapsack_id) }}" class="btn btn-danger" id="sweetDelete"><i class="bi bi-trash"></i></a> --}}
                         </td>
                     </tr>
                     @endforeach

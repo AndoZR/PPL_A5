@@ -36,8 +36,11 @@ Route::get('/', function () {
 // ALl USER
 Route::controller(c_beranda::class)->group(function () {
     Route::get('beranda', 'index')->name('beranda');
+    Route::get('beranda-pricing', 'index_2')->name('berandaPricing');
     Route::get('beranda-logged', 'index')->name('beranda.usaha')->middleware('multiAuth');
     Route::post('', 'sendMessage')->name('sendMessage');
+    Route::get('beranda-premium','pricing_premium')->name('beranda.premium');
+    Route::get('beranda-premiumPro','pricing_premiumPro')->name('beranda.premiumPro');
 });
 
 
@@ -130,7 +133,7 @@ Route::middleware(['multiAuth'])->group(function (){
 
 
 // --------------------- USER PREMIUM ONLY ------------------------
-Route::middleware(['auth:web', 'verified', 'checkStatus:premium'])->group(function (){
+Route::middleware(['auth:web', 'verified', 'checkStatus:sts2,sts3'])->group(function (){
     // Ramalan
     Route::controller(c_ramalan::class)->prefix('ramalan')->group(function () {
         Route::get('', 'getPendapatanStok')->name('ramalan');

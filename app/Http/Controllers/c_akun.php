@@ -192,11 +192,11 @@ class c_akun extends Controller
     }
 
     // get premium mas broo!!!
-    public function getPremium ()
-    {
-        Auth::guard('web')->user()->update([
-            'status' => 'premium'
-        ]);
-        return redirect()->route('dashboard');
-    }
+    // public function getPremium ()
+    // {
+    //     Auth::guard('web')->user()->update([
+    //         'status' => 'premium'
+    //     ]);
+    //     return redirect()->route('dashboard');
+    // }
 }

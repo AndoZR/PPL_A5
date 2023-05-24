@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -54,7 +55,7 @@
             </ul>
           </li>
 
-          <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
+          {{-- <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{ route('produk') }}">Produk</a></li>
               <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
@@ -64,9 +65,24 @@
               <li><a href="{{ route('knapsack') }}">Knapsack</a></li>
               @endif
             </li>
-          </ul>
+          </ul> --}}
+          @if (Auth::guard('web')->check() || Auth::guard('karyawan')->check())
+          <li><a href="{{ route('produk') }}">Produk</a></li>
+          <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
+          <li><a href="{{ route('keuangan') }}">Keuangan</a></li>
+          @endif
 
-        <li><a class="nav-link scrollto" href="#contact">Bantuan</a></li>
+          @if (Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->status, ['sts2','sts3']))
+          <li><a href="{{ route('ramalan') }}">Ramalan</a></li>
+          <li class="dropdown"><a href="#"><span>Rekomendasi</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{{ route('knapsack') }}">Knapsack</a></li>
+              <li><a href="{{ route('dataKnapsack') }}">Data Knapsack</a></li>
+            </li>
+          </ul>
+          @endif
+          
+          <li><a class="nav-link scrollto" href="#contact">Pengaduan</a></li>
 
           @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
             <li class="dropdown"><a href="#"><span>
@@ -602,66 +618,83 @@
       </div>
     </section><!-- End Team Section --> --}}
 
+    
+    @if (Auth::guard('web')->check() && Auth::guard('web')->user()->status === 'sts1' )
     <!-- ======= Pricing Section ======= -->
-    {{-- <section id="pricing" class="pricing">
+    <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Pricing</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Premium</h2>
+          <p>Upgrade akunmu menjadi premium supaya fitur yang kamu gunakan lebih lengkap. Jadikan bisnismu lebih berpengalaman dalam menggunakan fitur yang lebih banyak dari OPERATS</p>
         </div>
 
         <div class="row">
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="box">
-              <h3>Free Plan</h3>
-              <h4><sup>$</sup>0<span>per month</span></h4>
+              <h3>Gratis</h3>
+              <h4><sup>Rp</sup>0<span>per bulan</span></h4>
               <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+                <li><i class="bx bx-check"></i> Fitur manajemen stok</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen pendapatan</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen pengeluaran</li>
+                <li><i class="bx bx-check"></i> Fitur Profit</li>
+                <li class="na"><i class="bx bx-x"></i> <span>Prediksi stok</span></li>
+                <li class="na"><i class="bx bx-x"></i> <span>Rekomendasi Produk</span></li>
               </ul>
-              <a href="#" class="buy-btn">Get Started</a>
+              <a href="{{ route('dashboard') }}" class="buy-btn">Get Started</a>
             </div>
           </div>
 
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="box featured">
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
+            <div class="box">
               <h3>Business Plan</h3>
-              <h4><sup>$</sup>29<span>per month</span></h4>
+              <h4><sup>Rp</sup>4.999<span>per 1 bulan</span></h4>
               <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen stok</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen pendapatan</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen pengeluaran</li>
+                <li><i class="bx bx-check"></i> Fitur Profit</li>
+                <li><i class="bx bx-check"></i> Prediksi stok</li>
+                <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
               </ul>
-              <a href="#" class="buy-btn">Get Started</a>
+              <a href="{{ route('beranda.premium') }}" class="buy-btn">Get Started</a>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
             <div class="box">
               <h3>Developer Plan</h3>
-              <h4><sup>$</sup>49<span>per month</span></h4>
+              <h4><sup>Rp</sup>9.999<span>per 3 bulan</span></h4>
               <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen stok</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen pendapatan</li>
+                <li><i class="bx bx-check"></i> Fitur manajemen pengeluaran</li>
+                <li><i class="bx bx-check"></i> Fitur Profit</li>
+                <li><i class="bx bx-check"></i> Prediksi stok</li>
+                <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
               </ul>
-              <a href="#" class="buy-btn">Get Started</a>
+              <a href="{{ route('beranda.premiumPro') }}" class="buy-btn">Get Started</a>
             </div>
           </div>
 
         </div>
 
       </div>
-    </section><!-- End Pricing Section --> --}}
+    </section>
+    <!-- End Pricing Section -->
+    @endif
+
+    @if (isset($isPrice))
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+         var element = document.getElementById("pricing");
+         element.scrollIntoView({ behavior: "smooth" });
+      });
+    </script>
+    @endif
+      
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     {{-- <section id="faq" class="faq section-bg">
@@ -730,7 +763,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Bantuan</h2>
+          <h2>Pengaduan</h2>
           <p>Sampaikan kendalamu dalam menggunakan fitur OPERATS agar kami dapat segera melakukan maintenance terhadap masalah Anda. Sampaikan kendala Anda dengan detail melalui pesan dalam form di bawah ini!</p>
         </div>
 
