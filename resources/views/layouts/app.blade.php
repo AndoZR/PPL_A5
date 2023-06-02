@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-    <title>Dashboard | OPERATS</title>
+    <title>@yield('tab')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

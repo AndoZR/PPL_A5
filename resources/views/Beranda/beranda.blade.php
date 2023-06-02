@@ -128,7 +128,7 @@
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="assetsBeranda/img/hero-img.png" class="img-fluid animated" alt="">
+          <img src="{{ asset('assets/src/duitberanda.svg') }}" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -254,7 +254,7 @@
 
           </div>
 
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("assetsBeranda/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("assets/src/fitur1.svg");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
         </div>
 
       </div>
@@ -264,7 +264,7 @@
 
         <div class="row">
 
-          <div class="col-lg-5 align-items-stretch img" style='background-image: url("assetsBeranda/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+          <div class="col-lg-5 align-items-stretch img" style='background-image: url("assets/src/fitur2.svg");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
 
           <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 

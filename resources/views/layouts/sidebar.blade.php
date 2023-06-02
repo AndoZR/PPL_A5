@@ -3,18 +3,19 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('beranda.usaha') }}">
         <div class="sidebar-brand-icon">
-            <i class="fas fa-laugh-wink"></i>
+            {{-- <i class="fas fa-laugh-wink"></i> --}}
+            <img href='{{ asset('assets/src/LOGO.png') }}' width="100%" height="auto">
         </div>
         <div class="sidebar-brand-text mx-3">OPERATS</div>
     </a>
-
-{{-- fitur kelompok 1 --}}
-<div>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    
+    {{-- fitur kelompok 1 --}}
+    <div>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('tab', 'Produk | OPERATS')
+
 @section('title', 'Produk')
 
 @section('content')
