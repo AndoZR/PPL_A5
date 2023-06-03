@@ -17,10 +17,11 @@ return new class extends Migration
             $table->integer('nominal');
             $table->string('akun_usaha_username',20);
             $table->foreign('akun_usaha_username')->references('username')->on('users');
-            $table->string('transfer_bank_no_rekening',50);
+            $table->string('transfer_bank_no_rekening',50)->nullable();
             $table->foreign('transfer_bank_no_rekening')->references('no_rekening')->on('transfer_bank');
-            $table->string('gopay_nomor',13);
+            $table->string('gopay_nomor',13)->nullable();
             $table->foreign('gopay_nomor')->references('nomor')->on('gopay');
+            $table->enum('status',['unpaid','paid']);
         });
     }
 

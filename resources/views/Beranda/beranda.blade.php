@@ -10,6 +10,14 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <!-- MIDTRANS CONFIG DISINI ~~~~ -->
+  <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+  <script type="text/javascript"
+  src="https://app.sandbox.midtrans.com/snap/snap.js"
+  data-client-key='{{ config('midtrans.client_key') }}'></script>
+  <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+  <!-- MIDTRANS CONFIG DISINI ~~~~ -->
+
   <!-- Favicons -->
   <link href="{{ asset('assetsBeranda/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('assetsBeranda/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -659,7 +667,7 @@
                 <li><i class="bx bx-check"></i> Prediksi stok</li>
                 <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
               </ul>
-              <a href="{{ route('beranda.premium') }}" class="buy-btn">Get Started</a>
+              <a href="{{ route('pembayaran.premium') }}" class="buy-btn" id="pay-button">Get Started</a>
             </div>
           </div>
 
@@ -675,7 +683,7 @@
                 <li><i class="bx bx-check"></i> Prediksi stok</li>
                 <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
               </ul>
-              <a href="{{ route('beranda.premiumPro') }}" class="buy-btn">Get Started</a>
+              <a href="{{ route('pembayaran.premiumPro') }}" class="buy-btn" id="pay-button">Get Started</a>
             </div>
           </div>
 
@@ -943,6 +951,6 @@
     })
     </script>    
   @endif 
-</body>
 
+</body>
 </html>

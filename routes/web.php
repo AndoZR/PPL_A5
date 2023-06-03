@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\c_dashboard;
 use App\Http\Controllers\c_keuangan;
 use App\Http\Controllers\c_knapsack;
+use App\Http\Controllers\c_pembayaran;
 use App\Http\Controllers\c_pendapatan;
 use App\Http\Controllers\c_pengeluaran;
 use App\Http\Controllers\c_ramalan;
@@ -39,8 +40,6 @@ Route::controller(c_beranda::class)->group(function () {
     Route::get('beranda-pricing', 'index_2')->name('berandaPricing');
     Route::get('beranda-logged', 'index')->name('beranda.usaha')->middleware('multiAuth');
     Route::post('', 'sendMessage')->name('sendMessage');
-    Route::get('beranda-premium','pricing_premium')->name('beranda.premium');
-    Route::get('beranda-premiumPro','pricing_premiumPro')->name('beranda.premiumPro');
 });
 
 
@@ -70,6 +69,12 @@ Route::controller(c_register::class)->prefix('register')->group(function () {
 Route::middleware(['multiAuth'])->group(function (){
     Route::get('dashboard', [c_dashboard::class, 'index'])->name('dashboard');
     Route::get('logout', [c_login::class, 'logout'])->name('logout');
+
+    Route::controller(c_pembayaran::class)->prefix('pembayaran')->group(function () {
+        Route::get('premium','pricing_premium')->name('pembayaran.premium');
+        Route::get('premiumPro','pricing_premiumPro')->name('pembayaran.premiumPro');
+        Route::get('/invoice/{id}', 'invoice');
+    });
 
     // Akun Usaha ZONE dengan user usaha
     Route::controller(c_akun::class)->prefix('akun-usaha')->group(function () {

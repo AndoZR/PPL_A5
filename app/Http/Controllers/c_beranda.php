@@ -109,19 +109,4 @@ class c_beranda extends Controller
         $isPrice = 1;
         return view('beranda.beranda')->with('isPrice',$isPrice);
     }
-
-    // get premium
-    protected function pricing_premium(){
-        Auth::guard('web')->user()->update([
-            'status' => 'sts2'
-        ]);
-        return redirect()->route('dashboard');
-    }
-
-    protected function pricing_premiumPro(){
-        Auth::guard('web')->user()->update([
-            'status' => 'sts3'
-        ]);
-        return redirect()->route('dashboard');
-    }
 }
