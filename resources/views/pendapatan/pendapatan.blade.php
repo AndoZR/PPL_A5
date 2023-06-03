@@ -87,7 +87,17 @@
             showConfirmButton: false,
             timer: 5000
         })
-    </script>    
+    </script> 
+@elseif (session('messageMaksData'))
+<script>
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Data telah mencapai batas maksimal (100 data). Harap berlangganan akun premium!',
+        showConfirmButton: false,
+        timer: 5000
+    })
+</script>     
 @endif 
 
 @endsection

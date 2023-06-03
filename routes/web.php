@@ -73,7 +73,6 @@ Route::middleware(['multiAuth'])->group(function (){
     Route::controller(c_pembayaran::class)->prefix('pembayaran')->group(function () {
         Route::get('premium','pricing_premium')->name('pembayaran.premium');
         Route::get('premiumPro','pricing_premiumPro')->name('pembayaran.premiumPro');
-        Route::get('/invoice/{id}', 'invoice');
     });
 
     // Akun Usaha ZONE dengan user usaha

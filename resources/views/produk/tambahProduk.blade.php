@@ -54,7 +54,7 @@
 </form>
 
 {{-- define errors produk --}}
-{{-- @if ($errors->any())
+@if ($errors->any())
     @foreach ($errors->all() as $error)
         @if (strpos($error, 'required') !== false)
             <script>
@@ -78,6 +78,6 @@
             </script>
         @endif
     @endforeach
-@endif --}}
+@endif
 
 @endsection

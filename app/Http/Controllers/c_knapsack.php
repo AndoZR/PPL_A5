@@ -29,14 +29,17 @@ class c_knapsack extends Controller
         // ->whereRaw('pendapatan.tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)')
         // ->groupBy('pendapatan.jenis_produk','produk.nama','produk.harga','knapsack.stok_baru', 'knapsack.knapsack_id')
         // ->get();
+
+        $username = Auth::guard('web')->user()->username;
         
         $table = knapsack::query()->from('knapsack AS k')
         ->leftJoin(DB::raw('(SELECT pp.jenis_produk, SUM(pp.jumlah_produk) as jumlah_produk
                             FROM pendapatan pp
-                            WHERE pp.akun_usaha_username = "USR1" AND pp.tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+                            WHERE pp.akun_usaha_username = "' . $username . '" AND pp.tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
                             GROUP BY pp.jenis_produk) AS p'), 'k.produk_id', '=', 'p.jenis_produk')
         ->leftJoin('produk AS pr', 'k.produk_id', '=', 'pr.produk_id')
         ->select('p.jenis_produk', DB::raw('SUM(p.jumlah_produk) as permintaan'), 'pr.harga', 'k.stok_baru', 'k.knapsack_id', 'pr.nama')
+        ->where('pr.akun_usaha_username', $username)
         ->groupBy('k.produk_id', 'p.jenis_produk', 'pr.harga', 'k.stok_baru', 'pr.nama', 'k.knapsack_id')
         ->get();
     

@@ -6,6 +6,7 @@ use App\Models\karyawan;
 use App\Models\provinsi;
 use App\Models\kabupaten;
 use App\Models\kecamatan;
+use App\Models\status_akun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,14 +21,25 @@ class c_akun extends Controller
             $kecamatan = kecamatan::where('kecamatan_id', Auth::guard('web')->user()->kecamatan_id)->first();
             $kabupaten = kabupaten::where('kabupaten_id', $kecamatan->kabupaten_id)->first();
             $provinsi = provinsi::where('provinsi_id', $kabupaten->provinsi_id)->first();
-            return view('akun.akunUsaha', compact('kecamatan', 'kabupaten', 'provinsi'))->with('user', auth()->user());
+            // ngambil status di tabel status
+            $status = status_akun::where('status_akun_id', Auth::guard('web')->user()->status)->first();
+            return view('akun.akunUsaha', compact('kecamatan', 'kabupaten', 'provinsi'))->with([
+                'user'=> auth()->user(),
+                'status'=> $status,
+            ]);
         }
         elseif (Auth::guard('karyawan')->check()){
             $getAkunUsaha = User::where('username',Auth::guard('karyawan')->user()->akun_usaha_username)->first();
             $kecamatan = kecamatan::where('kecamatan_id', $getAkunUsaha->kecamatan_id)->first();
             $kabupaten = kabupaten::where('kabupaten_id', $kecamatan->kabupaten_id)->first();
             $provinsi = provinsi::where('provinsi_id', $kabupaten->provinsi_id)->first();
-            return view('akun.akunUsaha', compact('kecamatan', 'kabupaten', 'provinsi'))->with('user', $getAkunUsaha);
+
+            // ngambil status di tabel status
+            $status = status_akun::where('status_akun_id', $getAkunUsaha->status)->first();
+            return view('akun.akunUsaha', compact('kecamatan', 'kabupaten', 'provinsi'))->with([
+                'user' => $getAkunUsaha,
+                'status' => $status,
+            ]);
         }
 
     }

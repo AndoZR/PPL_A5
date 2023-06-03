@@ -112,7 +112,7 @@
                 </div>
                 <div class="modal-body">Klik log out jika Anda yakin ingin keluar, klik cancel jika tidak.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                     <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>

@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class notifikasi extends Model
+class status_akun extends Model
 {
     use HasFactory;
 
-    protected $table = 'notifikasi';
+    protected $table = 'status_akun';
 
-    protected $fillable = ['notifikasi_id', 'pesan', 'status', 'akun_usaha_username', 'akun_karyawan_username'];
+    protected $fillable = ['status_akun_id', 'status'];
 
     public $timestamps = false;
 }

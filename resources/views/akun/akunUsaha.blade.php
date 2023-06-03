@@ -74,6 +74,7 @@
             </div>
             <div class="col-md-6">
                 <div class="p-3 py-5 mt-5">
+                    <div class="col-md-12 mb-2"><label class="labels">Status Akun</label><input disabled type="text" class="form-control bg-white" value="{{ $status->status }}"></div>
                     <div class="col-md-12 mb-2"><label class="labels">No Handphone</label><input disabled type="text" class="form-control bg-white" value="{{ $user->nomor_handphone }}"></div>
                     <div class="col-md-12 mb-2"><label class="labels">Email</label><input disabled type="text" class="form-control bg-white" value="{{ $user->email }}"></div>
                     <div class="col-md-12 mb-2"><label class="labels">Username</label><input disabled type="text" class="form-control bg-white" value="{{ $user->username }}"></div>

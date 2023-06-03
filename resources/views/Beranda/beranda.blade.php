@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
   <title>Beranda | OPERATS</title>
   <meta content="" name="description">
@@ -103,7 +103,7 @@
             <img class="img-profile rounded-circle ms-2" style="width: 3vw; height: 3vw;"
             src="{{ asset('img/undraw_profile.svg') }}"></a>
               <ul>
-                <li><a href="{{ route('akunUsaha') }}">Profile</a></li>
+                <li><a href="{{ route('akunUsaha') }}">Profil</a></li>
                 <li><a href="{{ route('logout') }}">Log Out</a></li>
             </li>
 
@@ -651,7 +651,7 @@
                 <li class="na"><i class="bx bx-x"></i> <span>Prediksi stok</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span>Rekomendasi Produk</span></li>
               </ul>
-              <a href="{{ route('dashboard') }}" class="buy-btn">Get Started</a>
+              <a href="{{ route('dashboard') }}" class="buy-btn">Mulai</a>
             </div>
           </div>
 
@@ -667,7 +667,7 @@
                 <li><i class="bx bx-check"></i> Prediksi stok</li>
                 <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
               </ul>
-              <a href="{{ route('pembayaran.premium') }}" class="buy-btn" id="pay-button">Get Started</a>
+              <a href="{{ route('pembayaran.premium') }}" class="buy-btn" id="pay-button">pilih</a>
             </div>
           </div>
 
@@ -683,7 +683,7 @@
                 <li><i class="bx bx-check"></i> Prediksi stok</li>
                 <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
               </ul>
-              <a href="{{ route('pembayaran.premiumPro') }}" class="buy-btn" id="pay-button">Get Started</a>
+              <a href="{{ route('pembayaran.premiumPro') }}" class="buy-btn" id="pay-button">Pilih</a>
             </div>
           </div>
 

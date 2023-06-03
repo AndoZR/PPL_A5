@@ -72,6 +72,11 @@ class c_pengeluaran extends Controller
                 'keterangan' => $request->keterangan, 
                 'akun_usaha_username' => Auth::guard('web')->user()->username,
             ];
+
+            $totalRows = pengeluaran::where('akun_usaha_username', Auth::guard('web')->user()->username)->count();
+            if ($totalRows >= 100) {
+                return redirect()->route('produk')->with('messageMaksData', 'Data telah mencapai batas maksimal (50 data). Harap berlangganan akun premium!');
+            }
         }
         elseif (Auth::guard('karyawan')->check()){
             $username_usaha = Auth::guard('karyawan')->user()->akun_usaha_username;
@@ -83,6 +88,12 @@ class c_pengeluaran extends Controller
                 'akun_usaha_username' => $username_usaha,
                 'akun_karyawan_username' => Auth::guard('karyawan')->user()->username,
             ];
+
+            $username = Auth::guard('karyawan')->user()->akun_usaha_username;
+            $totalRows = pengeluaran::where('akun_usaha_username', $username)->count();
+            if ($totalRows >= 100) {
+                return redirect()->route('produk')->with('messageMaksData', 'Data telah mencapai batas maksimal (50 data). Harap berlangganan akun premium!');
+            }
         }
         
         pengeluaran::create($data);
