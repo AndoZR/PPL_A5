@@ -30,15 +30,15 @@
             <div class="mb-3">
                 <input type="hidden" name="token" value="{{ request()->token }}">
                 <input type="hidden" name="email" value="{{ request()->email }}">
-                <label class="form-label" for="newPassword">New Password</label>
+                <label class="form-label" for="newPassword">Password Baru</label>
                 <input class="form-control" type="password" name="password">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="repeatPassword">Repeat Password</label>
+                <label class="form-label" for="repeatPassword">Ulangi Password</label>
                 <input class="form-control" type="password" name="password_confirmation">
             </div>
             <div>
-                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-primary">Simpan</button>
             </div>
         </form>
     </div>    

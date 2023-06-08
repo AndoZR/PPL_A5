@@ -38,8 +38,8 @@ class c_pengeluaran extends Controller
     {
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
-            'nominal' => 'required|integer', 
-            'keterangan' => 'required', 
+            'nominal' => 'required|integer|max:11', 
+            'keterangan' => 'required|max:100', 
         ],
         // [
         //     'tanggal.required'=>'tanggal wajib diisi',

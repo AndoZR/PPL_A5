@@ -85,8 +85,10 @@ class c_login extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);  
+                // ? back()->with(['status' => __($status)])
+                ? back()->with(['status' => 'Email telah terkirim!'])
+                // : back()->withErrors(['email' => __($status)]);  
+                : back()->withErrors(['email' => 'Maaf email tidak ditemukan!']);  
     }
 
     public function updatePassword(Request $request)

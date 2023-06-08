@@ -101,7 +101,7 @@
                         </select>
                       </div>      
 
-                    <button class="btn btn-primary" type="submit">Get Keuangan</button>
+                    <button class="btn btn-primary" type="submit">Data Keuangan</button>
                 </form>
             </div>
         </div>
@@ -115,7 +115,7 @@
                     <canvas id="myBarChart"></canvas>
                 </div>
                 <hr>
-                    tes
+                    {{-- tes --}}
             </div>
         </div>
     </div>

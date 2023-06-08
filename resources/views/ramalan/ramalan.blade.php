@@ -41,9 +41,9 @@
                     <label class="form-label text-gray-900" for="permintaanPredik">Prediksi Bulan +</label>
                     <input class="form-control" type="number" min="0" id="permintaanPredik" name="permintaanPredik">
 
-                    <label class="form-label text-gray-900" for="alpha">Konstanta Perataan α (0-1)</label>
-                    <input class="form-control" type="number" onkeydown="return false" min="0" max="1" step="0.1" id="alpha" name="alpha">
-                    <!-- Menambahkan elemen HTML untuk menampilkan data dari beberapa label -->
+                    {{-- <label class="form-label text-gray-900" for="alpha">Konstanta Perataan α (0-1)</label>
+                    <input class="form-control" type="number" onkeydown="return false" min="0" max="1" step="0.1" id="alpha" name="alpha"> --}}
+                    
                 </div>
             </form>
         </div>
@@ -58,6 +58,12 @@
         chartDataGrafik.label = chartDataGrafik.label.concat(chartDataGrafikBaru.label);
         chartDataGrafik.data = chartDataGrafik.data.concat(chartDataGrafikBaru.data);
     @endif
+
+    // test multiline
+    var dataString = '{"label":["Apr","May","Jun"],"data":[[1,75,10],[2,22,11],[12,55,16]]}';
+    var dataObj = JSON.parse(dataString);
+
+    var dataArray = dataObj.data;
 
 </script>
 

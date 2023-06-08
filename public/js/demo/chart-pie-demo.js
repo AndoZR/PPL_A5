@@ -2,14 +2,35 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+// Mendefinisikan array warna
+var colors = [];
+
+// Fungsi untuk menghasilkan warna acak
+function generateRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Looping untuk setiap data
+for (var i = 0; i < chartDataGrafik.data.length; i++) {
+  var dataGrafik = chartDataGrafik.data[i];
+
+  // Generate warna acak
+  var backgroundColor = generateRandomColor();
+};
+
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: chartDataGrafik.label,
     datasets: [{
-      data: [55, 30, 15],
+      data: chartDataGrafik.data,
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

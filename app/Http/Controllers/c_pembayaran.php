@@ -14,12 +14,15 @@ class c_pembayaran extends Controller
 
     // get premium
     protected function pricing_premium(){
+        $nowDate = date('Y-m-d');
+        $futureDate = date('Y-m-d', strtotime('+1 months', strtotime($nowDate)));
         Auth::guard('web')->user()->update([
-            'status' => 'sts2'
+            'status' => 'sts2',
+            'tanggal_status' => $futureDate
         ]);
 
         // give id prd
-        $kode_pembayaran = 's';
+        $kode_pembayaran = 'gi';
         $i = 1;
         while ($i >= 0) {
             $pembayaran_id = $kode_pembayaran . $i;
@@ -94,7 +97,7 @@ class c_pembayaran extends Controller
         ]);
         
         // give id prd
-        $kode_pembayaran = 's';
+        $kode_pembayaran = 'pb';
         $i = 1;
         while ($i >= 0) {
             $pembayaran_id = $kode_pembayaran . $i;

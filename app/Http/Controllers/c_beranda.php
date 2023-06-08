@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\usaha;
 use App\Models\produk;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,10 +38,20 @@ class c_beranda extends Controller
                 }
                 
                 if ($days <= 0) {
-                    $getNotifExpired = '[PERINGATAN], produk "' . $data->nama . '" telah kadaluwarsa. Segera tangani lebih lanjut!';
+                    $getNotifExpired = '[PERINGATAN] Produk "' . $data->nama . '" telah kadaluwarsa. Segera tangani lebih lanjut!';
                     $collectnotif[] = $getNotifExpired;
                 }
+
+
             }
+
+            //Check Status
+            // $currentTimestamp = new DateTime($nowDate);
+            if (Auth::guard('web')->user()->tanggal_status < $nowDate) {
+                User::where("username", Auth::guard('web')->user()->username)
+                ->update(['status' => 'sts1']);
+            }
+            // dd($currentTimestamp);
             return view('beranda.beranda')->with('collectnotif', $collectnotif);
         }
 
@@ -79,6 +90,10 @@ class c_beranda extends Controller
 
     public function sendMessage(Request $request)
     {
+        $request->validate([
+            'nomor' => 'required|integer'
+        ]);
+        
         $curl = curl_init();
 
         curl_setopt_array($curl, array(

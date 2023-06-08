@@ -184,7 +184,7 @@
 @if (Auth::guard('web')->check() && Auth::guard('web')->user()->status == 'sts1')
     <!-- Sidebar Message buat ke premium -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+        <img class="sidebar-card-illustration mb-2" src="{{ asset('img/undraw_rocket.svg') }}" alt="">
         <p class="text-center mb-2"><strong>OPERATS</strong> memiliki fitur premium, aktifkan sekarang!</p>
         <a class="btn btn-success btn-sm" href="#" onclick="redirectToPremium()">Get Premium!</a>
     </div> 

@@ -74,7 +74,7 @@
             <div class="row text-center justify-content-end">
                 <div class="mb-5 col-auto">
                     @if (Auth::guard('web')->check())
-                    <a href="{{ route('akunKaryawan.hapus',$karyawan->username) }}" class="btn btn-danger profile-button" type="submit" id="sweetDelete">Hapus Akun</a>
+                    <a href="{{ route('akunKaryawan.hapus',$karyawan->username) }}" class="btn btn-danger profile-button" type="submit" id="sweetDeleteUnRelation">Hapus Akun</a>
                     <a href="{{ route('akunKaryawan') }}" class="btn btn-primary profile-button">Kembali</a>
                     @elseif (Auth::guard('karyawan')->check())
                     <a href="{{ route('akunKaryawan.edit', $karyawan->username) }}" class="btn btn-primary profile-button">Edit</a>

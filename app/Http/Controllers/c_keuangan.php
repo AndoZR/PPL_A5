@@ -75,11 +75,11 @@ class c_keuangan extends Controller
             //     AND YEAR(pendapatan.tanggal) = 2023
             // ORDER BY MONTH(pendapatan.tanggal) ASC;
             foreach ($checkboxValues as $key => $value) {
-                $dataPengeluaran = pendapatan::select(DB::raw('DISTINCT MONTH(pendapatan.tanggal) AS bulan, pengeluaran.nominal, pengeluaran.keterangan'))
+                $dataPengeluaran = pendapatan::select(DB::raw('DISTINCT MONTH(pendapatan.tanggal) AS bulan, pengeluaran.nominal, pengeluaran.keterangan', 'pendapatan.akun_usaha_username'))
                 ->leftJoin('pengeluaran', function ($join) {
                     $join->on(DB::raw('MONTH(pendapatan.tanggal)'), '=', DB::raw('MONTH(pengeluaran.tanggal)'));
                 })
-                ->where('pendapatan.akun_usaha_username', 'USR1')
+                ->where('pengeluaran.akun_usaha_username', Auth::guard('web')->user()->username)
                 ->whereMonth(DB::raw('pendapatan.tanggal'), $months[$key])
                 ->whereYear('pendapatan.tanggal', $request->tahun)
                 ->get();
@@ -135,7 +135,7 @@ class c_keuangan extends Controller
                 ->leftJoin('pengeluaran', function ($join) {
                     $join->on(DB::raw('MONTH(pendapatan.tanggal)'), '=', DB::raw('MONTH(pengeluaran.tanggal)'));
                 })
-                ->where('pendapatan.akun_usaha_username', 'USR1')
+                ->where('pengeluaran.akun_usaha_username', $username_usaha)
                 ->whereMonth(DB::raw('pendapatan.tanggal'), $months[$key])
                 ->whereYear('pendapatan.tanggal', $request->tahun)
                 ->get();
@@ -158,6 +158,7 @@ class c_keuangan extends Controller
             }
         }
 
+        // dd($dataPengeluaran);
         return view('keuangan.keuangan')->with([
             'dataGrafik' => json_encode($dataGrafik)
         ]);

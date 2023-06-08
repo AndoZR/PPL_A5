@@ -29,7 +29,9 @@ class User extends Authenticatable implements  MustVerifyEmail
     'alamat', 
     'nomor_handphone', 
     'email', 
-    'status', 
+    'status',
+    'email_verified_at',
+    'tanggal_status',
     'kecamatan_id'];
 
     public function getEmailForVerification()

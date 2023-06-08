@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->string('username',20)->primary();
-            $table->string('password');
-            $table->string('nama_usaha');
+            $table->string('password',50);
+            $table->string('nama_usaha',50);
             $table->string('alamat',100);
             $table->string('nomor_handphone',13);
             $table->string('email',50);
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('status')->references('status_akun_id')->on('status_akun');
             $table->string('kecamatan_id',7);
             $table->timestamp('email_verified_at')->nullable();
+            $table->date('tanggal_status');
             $table->rememberToken();
             $table->timestamps();
         });

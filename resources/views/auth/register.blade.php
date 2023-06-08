@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-6 mb-3">
                                         <label class="form-label" for="no_handphone">No Handphone</label>
-                                        <input class="form-control" type="text" id="no_handphone"  placeholder="Masukkan no handphone" name="nomor_handphone">
+                                        <input class="form-control" type="tel" id="no_handphone"  placeholder="Masukkan no handphone" name="nomor_handphone">
                                     </div>
                                     <div class="col-6 mb-3">
                                         <div class="col-12 mb-3">

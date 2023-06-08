@@ -51,17 +51,6 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <!-- notif -->
-          <li class="dropdown">
-            <a style="color: white"><i class="bi bi-bell"></i></a>
-            <ul style="max-width:500px; max-height:300px; overflow-y: auto;">
-              @if(isset($collectnotif))
-                @foreach ($collectnotif as $item)
-                  <li><a href="#">{{ $item }}</a></li>  
-                @endforeach
-              @endif
-            </ul>
-          </li>
 
           {{-- <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -75,22 +64,35 @@
             </li>
           </ul> --}}
           @if (Auth::guard('web')->check() || Auth::guard('karyawan')->check())
-          <li><a href="{{ route('produk') }}">Produk</a></li>
-          <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
-          <li><a href="{{ route('keuangan') }}">Keuangan</a></li>
+            <!-- notif -->
+            <li class="dropdown">
+              <a style="color: white"><i class="bi bi-bell"></i></a>
+              <ul style="max-width:500px; max-height:300px; overflow-y: auto;">
+                @if(isset($collectnotif))
+                  @foreach ($collectnotif as $item)
+                    <li><a href="#">{{ $item }}</a></li>  
+                  @endforeach
+                @endif
+              </ul>
+            </li>
+            <li><a href="{{ route('produk') }}">Produk</a></li>
+            <li><a href="{{ route('pendapatan') }}">Pendapatan</a></li>
+            <li><a href="{{ route('keuangan') }}">Keuangan</a></li>
           @endif
 
           @if (Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->status, ['sts2','sts3']))
-          <li><a href="{{ route('ramalan') }}">Ramalan</a></li>
-          <li class="dropdown"><a href="#"><span>Rekomendasi</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{{ route('knapsack') }}">Knapsack</a></li>
-              <li><a href="{{ route('dataKnapsack') }}">Data Knapsack</a></li>
-            </li>
-          </ul>
+            <li><a href="{{ route('ramalan') }}">Ramalan</a></li>
+            <li class="dropdown"><a href="#"><span>Rekomendasi</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="{{ route('knapsack') }}">Knapsack</a></li>
+                <li><a href="{{ route('dataKnapsack') }}">Data Knapsack</a></li>
+              </li>
+            </ul>
           @endif
           
-          <li><a class="nav-link scrollto" href="#contact">Pengaduan</a></li>
+          @if (Auth::guard('web')->check() || Auth::guard('karyawan')->check())
+            <li><a class="nav-link scrollto" href="#contact">Pengaduan</a></li>
+          @endif
 
           @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
             <li class="dropdown"><a href="#"><span>
@@ -104,7 +106,7 @@
             src="{{ asset('img/undraw_profile.svg') }}"></a>
               <ul>
                 <li><a href="{{ route('akunUsaha') }}">Profil</a></li>
-                <li><a href="{{ route('logout') }}">Log Out</a></li>
+                <li><a href="" data-bs-toggle="modal" data-bs-target="#Logout">Log Out</a></li>
             </li>
 
           @else
@@ -126,10 +128,13 @@
           <h1>Better Solutions For Your Agro Business</h1>
           <h2>Operats menyediakan layanan dan fitur penunjang bisnismu</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            @if (Auth::guard('web')->check() or Auth::guard('karyawan')->check())
-            <a href="{{ route('dashboard') }}" class="btn-get-started scrollto me-3">Mulai Beroperasi</a>
+            @if (Auth::guard('web')->check())
+              <a href="{{ route('dashboard') }}" class="btn-get-started scrollto me-3">Mulai Beroperasi</a>
+              @if (Auth::guard('web')->user()->status == 'sts1')
+                <a href="#pricing" class="btn-get-started scrollto me-3">Get Premium</a>
+              @endif
             @else
-            <a href="{{ route('register') }}" class="btn-get-started scrollto me-3">Registrasi Akun</a>
+              <a href="{{ route('register') }}" class="btn-get-started scrollto me-3">Registrasi Akun</a>
             @endif
             {{-- <a href="#about" class="btn-get-started scrollto">Mulai Beroperasi</a> --}}
             {{-- <a href="#" class="getstarted glightbox btn-watch-video"><i class=""></i><span>Fitur Kami</span></a> --}}
@@ -648,6 +653,7 @@
                 <li><i class="bx bx-check"></i> Fitur manajemen pendapatan</li>
                 <li><i class="bx bx-check"></i> Fitur manajemen pengeluaran</li>
                 <li><i class="bx bx-check"></i> Fitur Profit</li>
+                <li><i class="bx bx-check"></i> Terbatas hanya 100 data</li>
                 <li class="na"><i class="bx bx-x"></i> <span>Prediksi stok</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span>Rekomendasi Produk</span></li>
               </ul>
@@ -657,7 +663,7 @@
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
             <div class="box">
-              <h3>Business Plan</h3>
+              <h3>Premium</h3>
               <h4><sup>Rp</sup>4.999<span>per 1 bulan</span></h4>
               <ul>
                 <li><i class="bx bx-check"></i> Fitur manajemen stok</li>
@@ -666,6 +672,7 @@
                 <li><i class="bx bx-check"></i> Fitur Profit</li>
                 <li><i class="bx bx-check"></i> Prediksi stok</li>
                 <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
+                <li><i class="bx bx-check"></i> Tidak ada batas data</li>
               </ul>
               <a href="{{ route('pembayaran.premium') }}" class="buy-btn" id="pay-button">pilih</a>
             </div>
@@ -673,7 +680,7 @@
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
             <div class="box">
-              <h3>Developer Plan</h3>
+              <h3>Premium Pro</h3>
               <h4><sup>Rp</sup>9.999<span>per 3 bulan</span></h4>
               <ul>
                 <li><i class="bx bx-check"></i> Fitur manajemen stok</li>
@@ -682,6 +689,7 @@
                 <li><i class="bx bx-check"></i> Fitur Profit</li>
                 <li><i class="bx bx-check"></i> Prediksi stok</li>
                 <li><i class="bx bx-check"></i> Rekomendasi Produk</li>
+                <li><i class="bx bx-check"></i> Tidak ada batas data</li>
               </ul>
               <a href="{{ route('pembayaran.premiumPro') }}" class="buy-btn" id="pay-button">Pilih</a>
             </div>
@@ -766,6 +774,7 @@
       </div>
     </section><!-- End Frequently Asked Questions Section --> --}}
 
+    @if (Auth::guard('web')->check() || Auth::guard('karyawan')->check())
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
@@ -800,7 +809,7 @@
           </div>
 
           <div class="col-lg-6 rounded bg-white shadow">
-            <form action="{{ route('sendMessage') }}" class="m-5" method="post">
+            <form action="{{ route('sendMessage') }}" class="m-5" method="post" id="pengaduan">
               @csrf
               <div class="row">
                 <div class="form-group col-md-6">
@@ -811,7 +820,7 @@
                   <label class="form-label" for="nomor">Nomor Handphone</label>
                   <div  class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">+62</span>
-                    <input type="text" class="form-control" name="nomor" id="nomor">
+                    <input type="text" class="form-control" name="nomor" id="nomor" placeholder="81216532315">
                   </div>
                 </div>
               </div>
@@ -834,7 +843,7 @@
       </div>
     </section>
     <!-- End Contact Section -->
-
+    @endif
   </main>
   <!-- End #main -->
 
@@ -949,8 +958,48 @@
       showConfirmButton: false,
       timer: 5000
     })
+    window.addEventListener('DOMContentLoaded', (event) => {
+         var element = document.getElementById("pengaduan");
+         element.scrollIntoView({ behavior: "smooth" });
+      });
     </script>    
   @endif 
+
+  {{-- define errors pengaduan --}}
+  @if ($errors->any())
+    <script>
+      Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Tipe data yang dimasukkan salah!',
+          showConfirmButton: false,
+          timer: 5000
+      })
+      window.addEventListener('DOMContentLoaded', (event) => {
+         var element = document.getElementById("pengaduan");
+         element.scrollIntoView({ behavior: "smooth" });
+      });
+  </script>
+  @endif 
+
+<!-- Modal LOG OUT-->
+<div class="modal fade" id="Logout" tabindex="-1" aria-labelledby="LogoutLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="LogoutLabel">Ingin Keluar?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Klik log out jika Anda yakin ingin keluar, klik batal jika tidak.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

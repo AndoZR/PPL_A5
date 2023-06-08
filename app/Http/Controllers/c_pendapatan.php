@@ -50,7 +50,8 @@ class c_pendapatan extends Controller
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
             'jenis_produk' => 'required', 
-            'jumlah_produk' => 'required|integer', 
+            'jumlah_produk' => 'required|integer',
+            'keterangan' => 'max:100'
         ],
         // [
         //     'tanggal.required'=>'tanggal wajib diisi',

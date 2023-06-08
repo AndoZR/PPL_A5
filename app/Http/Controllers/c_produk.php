@@ -34,10 +34,11 @@ class c_produk extends Controller
     {
         // Validate
         $request->validate([
-            'nama' => 'required', 
-            'stok' => 'required|integer', 
-            'harga' => 'required|integer', 
+            'nama' => 'required|max:50', 
+            'stok' => 'required|integer|max:11', 
+            'harga' => 'required|integer|max:11', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
+            'deskripsi' => 'max:100'
         ],
         // [
         //     'nama.required'=>'nama wajib diisi',
@@ -78,7 +79,7 @@ class c_produk extends Controller
             ];
 
             $totalRows = produk::where('akun_usaha_username', Auth::guard('web')->user()->username)->count();
-            if ($totalRows >= 100) { //tambahkan syarat jika status free baru make AND
+            if ($totalRows >= 100 && Auth::guard('web')->user()->status == 'sts1') { //tambahkan syarat jika status free baru make AND
                 return redirect()->route('produk')->with('messageMaksData', 'Data telah mencapai batas maksimal (50 data). Harap berlangganan akun premium!');
             }
         }
@@ -98,7 +99,7 @@ class c_produk extends Controller
 
             $username = Auth::guard('karyawan')->user()->akun_usaha_username;
             $totalRows = produk::where('akun_usaha_username', $username)->count();
-            if ($totalRows >= 100) {
+            if ($totalRows >= 100 && $username) {
                 return redirect()->route('produk')->with('messageMaksData', 'Data telah mencapai batas maksimal (50 data). Harap berlangganan akun premium!');
             }
         }

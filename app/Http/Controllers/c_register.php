@@ -22,9 +22,9 @@ class c_register extends Controller
         // dd($request->provinsi);
         Validator::make($request->all(), [
             'password' => 'required|max:50',
-            'nama_usaha' => 'required',
-            'alamat' => 'required',
-            'nomor_handphone' => 'required|numeric',
+            'nama_usaha' => 'required|max:50',
+            'alamat' => 'required|max:100',
+            'nomor_handphone' => 'required|numeric|digits_between:1,13',
             'email' => 'required|email',
             'provinsi' => 'required',
             'kabupaten' => 'required',
@@ -49,6 +49,8 @@ class c_register extends Controller
             $i++;
         }            
 
+        $nowDate = date('Y-m-d');
+
         $user = User::create([
             'username' => $username,
             'password' => Hash::make($request->password),
@@ -57,7 +59,8 @@ class c_register extends Controller
             'nomor_handphone' => $request->nomor_handphone,
             'email' => $request->email,
             'status' => 'sts1',
-            'kecamatan_id' => $request->kecamatan
+            'kecamatan_id' => $request->kecamatan,
+            'tanggal_status' => $nowDate
         ]);
 
         event(new Registered($user));

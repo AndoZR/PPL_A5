@@ -110,7 +110,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Klik log out jika Anda yakin ingin keluar, klik cancel jika tidak.</div>
+                <div class="modal-body">Klik log out jika Anda yakin ingin keluar, klik batal jika tidak.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                     <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
@@ -121,10 +121,41 @@
 
 </body>
 
-{{-- SCRIPT FOR ALERT DELETE --}}
+{{-- SCRIPT FOR ALERT DELETE with relasi --}}
 <script type="text/javascript">
     $(function(){
         $(document).on('click', '#sweetDelete', function(e){
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+                title: 'Apakah data ini akan dihapus?',
+                text: "[Peringatan] Data tidak akan dapat dikembalikan! Hati-hati dengan data yang berelasi dengan fitur lainnya!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Data berhasil dihapus!',
+                        showConfirmButton: false,
+                        timer: 5000
+                    })
+                    window.location.href = link;
+                }
+                })
+        });
+    });
+</script>
+
+{{-- SCRIPT FOR ALERT DELETE with no relasi (detail karyawan dll) --}}
+<script type="text/javascript">
+    $(function(){
+        $(document).on('click', '#sweetDeleteUnRelation', function(e){
             e.preventDefault();
             var link = $(this).attr("href");
             Swal.fire({

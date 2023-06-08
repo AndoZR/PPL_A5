@@ -11,7 +11,7 @@ class pembayaran extends Model
 
     protected $table = 'pembayaran';
 
-    protected $fillable = ['pembayaran_id', 'timestamp', 'nominal', 'akun_usaha_username', 'transfer_bank_no_rekening', 'gopay_nomor', 'status'];
+    protected $fillable = ['pembayaran_id', 'timestamp', 'nominal', 'akun_usaha_username'];
 
     public $timestamps = false;
 

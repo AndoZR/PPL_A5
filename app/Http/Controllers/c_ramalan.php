@@ -59,7 +59,7 @@ class c_ramalan extends Controller
         $dataAktual = $this->dataAktual;
 
         // Konstanta Alpha
-        $alpha = $request->alpha;
+        $alpha = 0.5;
         
         //permintaan buat prediksi ASEK
         $permintaanPredik = $request->permintaanPredik;

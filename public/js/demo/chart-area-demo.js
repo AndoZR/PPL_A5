@@ -26,6 +26,26 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+//test multiline
+var datasets = [];
+for (var i = 0; i < dataArray.length; i++) {
+  datasets.push({
+    label: "Total",
+    lineTension: 0,
+    backgroundColor: "rgba(78, 115, 223, 0.05)",
+    borderColor: "rgba(78, 115, 223, 1)",
+    pointRadius: 3,
+    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+    pointBorderColor: "rgba(78, 115, 223, 1)",
+    pointHoverRadius: 3,
+    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+    pointHitRadius: 10,
+    pointBorderWidth: 2,
+    data: dataArray[i]
+  });
+}
+
 
 // Area Chart Ramalan
 
@@ -34,21 +54,23 @@ var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: chartDataGrafik.label, //.concat(chartDataGrafikBaru.label),
-    datasets: [{
-      label: "Total",
-      lineTension: 0, // mengatur kelengkungan garis
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: chartDataGrafik.data, //.concat(chartDataGrafikBaru.data),
-    }],
+    datasets: [
+                {
+                  label: "Total",
+                  lineTension: 0, // mengatur kelengkungan garis
+                  backgroundColor: "rgba(78, 115, 223, 0.05)",
+                  borderColor: "rgba(78, 115, 223, 1)",
+                  pointRadius: 3,
+                  pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                  pointBorderColor: "rgba(78, 115, 223, 1)",
+                  pointHoverRadius: 3,
+                  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                  pointHitRadius: 10,
+                  pointBorderWidth: 2,
+                  data: chartDataGrafik.data, //.concat(chartDataGrafikBaru.data),
+                }
+            ],
 },
   options: {
     maintainAspectRatio: false,
