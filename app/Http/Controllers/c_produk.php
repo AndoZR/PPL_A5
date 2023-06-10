@@ -35,8 +35,8 @@ class c_produk extends Controller
         // Validate
         $request->validate([
             'nama' => 'required|max:50', 
-            'stok' => 'required|integer|max:11', 
-            'harga' => 'required|integer|max:11', 
+            'stok' => 'required|integer|digits_between:1,11', 
+            'harga' => 'required|integer|digits_between:1,11', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
             'deskripsi' => 'max:100'
         ],
@@ -119,8 +119,8 @@ class c_produk extends Controller
         // Validate
         $request->validate([
             'nama' => 'required', 
-            'stok' => 'required|integer', 
-            'harga' => 'required|integer', 
+            'stok' => 'required|integer|digits_between:1,11', 
+            'harga' => 'required|integer|digits_between:1,11', 
             'tgl_exp' => 'required|date_format:Y-m-d', 
         ],
         // [

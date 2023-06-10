@@ -67,7 +67,7 @@ class c_knapsack extends Controller
     public function simpan(Request $request)
     {
         $request->validate([
-            'stok_baru' => 'required|integer', 
+            'stok_baru' => 'required|integer|digits_between:1,11', 
             'jenis_produk' => 'required', 
             ],
         );

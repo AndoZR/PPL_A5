@@ -50,7 +50,7 @@ class c_pendapatan extends Controller
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
             'jenis_produk' => 'required', 
-            'jumlah_produk' => 'required|integer',
+            'jumlah_produk' => 'required|integer||digits_between:1,11',
             'keterangan' => 'max:100'
         ],
         // [
@@ -142,7 +142,7 @@ class c_pendapatan extends Controller
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
             'jenis_produk' => 'required', 
-            'jumlah_produk' => 'required|integer', 
+            'jumlah_produk' => 'required|integer|digits_between:1,11', 
         ],[
             'tanggal.required'=>'tanggal wajib diisi',
             'tanggal.date_format:Y-m-d'=>'tanggal wajib berformat tanggal',

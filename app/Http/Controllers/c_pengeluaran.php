@@ -38,7 +38,7 @@ class c_pengeluaran extends Controller
     {
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
-            'nominal' => 'required|integer|max:11', 
+            'nominal' => 'required|integer|digits_between:1,11', 
             'keterangan' => 'required|max:100', 
         ],
         // [
@@ -111,7 +111,7 @@ class c_pengeluaran extends Controller
         // Validate
         $request->validate([
             'tanggal' => 'required|date_format:Y-m-d', 
-            'nominal' => 'required|integer', 
+            'nominal' => 'required|digits_between:1,11', 
             'keterangan' => 'required', 
         ],
         // [
